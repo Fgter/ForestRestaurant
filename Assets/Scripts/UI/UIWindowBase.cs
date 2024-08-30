@@ -24,10 +24,10 @@ public class UIWindowBase : MonoBehaviour
     {
 
     }
-    public virtual void OnShow()
-    {
+    //public virtual void OnShow()
+    //{
 
-    }
+    //}
     public virtual void OnHide()
     {
 
