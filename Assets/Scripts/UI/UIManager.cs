@@ -7,7 +7,6 @@ using QFramework;
 public class UIManager : Singleton<UIManager>
 {
     Dictionary<Type, UIElement> UIResources = new Dictionary<Type, UIElement>();
-    ResLoader resLoader = ResLoader.Allocate();
     class UIElement
     {
         public string AssetName;
@@ -16,7 +15,7 @@ public class UIManager : Singleton<UIManager>
     }
     public UIManager()
     {
-        UIResources[typeof(UITest)] = new UIElement { AssetName = "UITest" };
+        UIResources[typeof(UITest)] = new UIElement { AssetName = PathConfig.UIPath + "UITest" };
     }
     public T Show<T>() where T : UIWindowBase
     {
@@ -31,10 +30,10 @@ public class UIManager : Singleton<UIManager>
             }
             else
             {
-                GameObject prefab = resLoader.LoadSync<GameObject>(info.AssetName);
+                GameObject prefab = ResLoader.instance.Load<GameObject>(info.AssetName);
                 if (prefab == null)
                 {
-                    Debug.LogError(info.AssetName + "can not find");
+                    Debug.LogError(info.AssetName + "can not be find");
                     return default;
                 }
                 info.Instance = GameObject.Instantiate(prefab);
@@ -105,7 +104,7 @@ public class UIManager : Singleton<UIManager>
             }
             else
             {
-                GameObject prefab = resLoader.LoadSync<GameObject>(info.AssetName);
+                GameObject prefab = ResLoader.instance.Load<GameObject>(info.AssetName);
                 if (prefab == null)
                 {
                     Debug.LogError(info.AssetName + "can not find");

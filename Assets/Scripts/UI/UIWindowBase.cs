@@ -5,7 +5,7 @@ using QFramework;
 using UnityEngine.Events;
 using System;
 
-public class UIWindowBase : MonoBehaviour
+public class UIWindowBase : ViewController
 {
     public UnityAction<UIWindowBase, Result> OnCloseHanlder;
 
