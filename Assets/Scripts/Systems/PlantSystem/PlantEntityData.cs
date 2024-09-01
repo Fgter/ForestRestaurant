@@ -33,7 +33,7 @@ public class PlantEntityData
 
     public void Grow()//生长
     {
-        m_growedTime += 1;
+        m_growedTime += 20000;
         TryNextStage();
     }
     public void Grow(float time)//time单位为天(day)

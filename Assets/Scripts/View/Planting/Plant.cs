@@ -36,16 +36,17 @@ public class Plant : MonoBehaviour,IController,IPointerClickHandler
         {
             PlantDefine define = m_entityData.define;
             this.SendCommand(new AddItemCommond(define.HarvestId,Random.Range(define.HarvestCountMin,define.HarvestCountMax)));
+            if (m_entityData.canReGrow)
+            {
+                m_entityData.ReGrow();
+            }
+            else
+            {
+                this.SendCommand(new ClearSoilCommond(soil));
+                Destroy(gameObject);
+            }
         }
-        if (m_entityData.canReGrow)
-        {
-            m_entityData.ReGrow();
-        }
-        else
-        {
-            this.SendCommand(new ClearSoilCommond(soil));
-            Destroy(gameObject);
-        }
+        
     }
 
     public IArchitecture GetArchitecture()
