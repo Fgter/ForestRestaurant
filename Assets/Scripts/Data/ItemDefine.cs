@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace Data
 {
     public enum ItemType
     {
@@ -12,7 +12,7 @@ namespace Models
         Harvest,//收获物
         food,
     }
-    public class ItemDefine
+    public class ItemDefine:IDefine
     {
         public int Id { get; set; }
         public string Name { get; set; }

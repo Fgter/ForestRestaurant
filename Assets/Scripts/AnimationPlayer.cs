@@ -15,8 +15,10 @@ public class AnimationPlayer:MonoBehaviour
     }
     public void SetAnimation(string animationName,bool play=true)
     {
-        sprites = ResLoader.instance.LoadAll<Sprite>(PathConfig.AnimationPath + animationName);
+        sprites = ResLoader.LoadAll<Sprite>(PathConfig.AnimationPath + animationName);
         if (!play) return;
+        if (cor != null)
+            Stop();
         if (sprites.Length <= 0)
         {
             Debug.LogError("Animation:" + animationName + "can not find");

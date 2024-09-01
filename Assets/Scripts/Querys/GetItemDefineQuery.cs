@@ -1,6 +1,7 @@
 using QFramework;
 using Models;
 using UnityEngine;
+using Data;
 
 public class GetItemDefineQuery : AbstractQuery<ItemDefine>
 {
@@ -18,7 +19,7 @@ public class GetItemDefineQuery : AbstractQuery<ItemDefine>
         }
         else
         {
-            Debug.LogError("id:" + id + " is not in defines");
+            Debug.LogError("Item id:" + id + " is not in ItemDefines");
             return default;
         }
     }
