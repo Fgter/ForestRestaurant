@@ -30,7 +30,7 @@ public class UIManager : Singleton<UIManager>
             }
             else
             {
-                GameObject prefab = ResLoader.instance.Load<GameObject>(info.AssetName);
+                GameObject prefab = ResLoader.Load<GameObject>(info.AssetName);
                 if (prefab == null)
                 {
                     Debug.LogError(info.AssetName + "can not be find");
@@ -104,7 +104,7 @@ public class UIManager : Singleton<UIManager>
             }
             else
             {
-                GameObject prefab = ResLoader.instance.Load<GameObject>(info.AssetName);
+                GameObject prefab = ResLoader.Load<GameObject>(info.AssetName);
                 if (prefab == null)
                 {
                     Debug.LogError(info.AssetName + "can not find");

@@ -22,11 +22,11 @@ public class Test : ViewController,IController
 
     private void OnMouseDown()
     {
-        UIManager.instance.ShowPop<UITest>(this.transform,false,3);
+        GetComponent<Soil>().GrowPlant(1);
     }
 
     private void Start()
     {
-        GetComponent<AnimationPlayer>().SetAnimation("Run");
+        this.GetModel<DataModel>();
     }
 }

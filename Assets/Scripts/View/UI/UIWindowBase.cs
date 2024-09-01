@@ -7,7 +7,7 @@ using System;
 
 public class UIWindowBase : ViewController
 {
-    public UnityAction<UIWindowBase, Result> OnCloseHanlder;
+    UnityAction<UIWindowBase, Result> OnCloseHanlder;
 
     public virtual Type Type
     {
