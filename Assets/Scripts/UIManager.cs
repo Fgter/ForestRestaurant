@@ -4,6 +4,19 @@ using UnityEngine;
 using System;
 using QFramework;
 
+public interface IUIData
+{ 
+
+}
+
+public class MessageTipData:IUIData
+{
+    public MessageTipData(string message)
+    {
+        this.message = message;
+    }
+    public string message;
+}
 public class UIManager : Singleton<UIManager>
 {
     Dictionary<Type, UIElement> UIResources = new Dictionary<Type, UIElement>();
@@ -16,8 +29,9 @@ public class UIManager : Singleton<UIManager>
     public UIManager()
     {
         UIResources[typeof(UITest)] = new UIElement { AssetName = PathConfig.UIPath + "UITest" };
+        UIResources[typeof(PopUIPlantInfo)] = new UIElement { AssetName = PathConfig.UIPath + "PopUIPlantInfo" };
     }
-    public T Show<T>() where T : UIWindowBase
+    public T Show<T>(IUIData data) where T : UIWindowBase
     {
         Type type = typeof(T);
         if (UIResources.ContainsKey(type))
@@ -26,27 +40,25 @@ public class UIManager : Singleton<UIManager>
             if (info.Instance != null)
             {
                 info.Instance.SetActive(true);
-                //info.script.OnShow();
             }
             else
             {
                 GameObject prefab = ResLoader.Load<GameObject>(info.AssetName);
                 if (prefab == null)
                 {
-                    Debug.LogError(info.AssetName + "can not be find");
+                    Debug.LogError(info.AssetName + " can not be find");
                     return default;
                 }
                 info.Instance = GameObject.Instantiate(prefab);
                 info.script = info.Instance.GetComponent<T>();
                 info.Instance.SetActive(true);
-                info.script.OnInit();
-                //info.script.OnShow();
             }
+            info.script.OnShow(data);
             return info.script as T;
         }
         else
         {
-            Debug.LogError(typeof(T).ToString() + "is not in dictionary");
+            Debug.LogError(typeof(T).ToString() + " is not in dictionary(人话:UIManager里面没注册)");
             return default;
         }
 
@@ -90,7 +102,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="offset"></param>
     /// <param name="offsetDir"></param>
     /// <returns></returns>
-    public T ShowPop<T>(Transform ts, bool ownerIsUI=false, float offset = 1f, Dirction offsetDir = Dirction.right) where T : UIWindowBase
+    public T ShowPop<T>(IUIData data, Transform ts, bool ownerIsUI=false, float offset = 1f, Dirction offsetDir = Dirction.right) where T : UIWindowBase
     {
         #region
         Type type = typeof(T);
@@ -100,7 +112,6 @@ public class UIManager : Singleton<UIManager>
             if (info.Instance != null)
             {
                 info.Instance.SetActive(true);
-                //info.script.OnShow();
             }
             else
             {
@@ -113,9 +124,8 @@ public class UIManager : Singleton<UIManager>
                 info.Instance = GameObject.Instantiate(prefab);
                 info.script = info.Instance.GetComponent<T>();
                 info.Instance.SetActive(true);
-                info.script.OnInit();
-                //info.script.OnShow();
             }
+            info.script.OnShow(data);
             #endregion
             Vector3 dir = offsetDir switch
             {
@@ -185,7 +195,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ShowMessageTip(string tip)
     {
-        UIMessageTip ui= Show<UIMessageTip>();
-        ui.SetTip(tip);
+        MessageTipData data = new MessageTipData(tip);
+        UIMessageTip ui= Show<UIMessageTip>(data);
     }
 }

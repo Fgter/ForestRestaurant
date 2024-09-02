@@ -13,16 +13,13 @@ public class Test : ViewController,IController
 
     public void test()
     {
-        //var ui= UIManager.instance.Show<UITest>();
-        //ui.aaaa();
-        UIManager.instance.ShowPop<UITest>(this.transform,true,3);
-
-       
+        
     }
 
     private void OnMouseDown()
     {
         GetComponent<Soil>().GrowPlant(1);
+        //UIManager.instance.Show<PopUIPlantInfo>(new PopUIPlantInfoData(GetComponent<Soil>().plant));
     }
 
     private void Start()

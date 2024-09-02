@@ -8,37 +8,26 @@ using UnityEngine.EventSystems;
 public class Plant : MonoBehaviour,IController,IPointerClickHandler
 {
     public Soil soil { get; private set; }
-    PlantEntityData m_entityData;
+    public PlantEntityData entityData { get; private set; }
     AnimationPlayer anim;
 
     public void Init(PlantEntityData entityData,Soil soil)
     {
-        m_entityData = entityData;
+        this.entityData = entityData;
         this.soil = soil;
         anim = GetComponent<AnimationPlayer>();
-        m_entityData.StageSwitchEvent += SwitchAnimation;
+        this.entityData.StageSwitchEvent += SwitchAnimation;
         RefreshAnimation();
     }
-
-    void SwitchAnimation(string path)
+    public void Harvest()
     {
-        anim.SetAnimation(path);
-    }
-
-    void RefreshAnimation()
-    {
-        anim.SetAnimation(m_entityData.define.Animation[m_entityData.currentStage]);
-    }
-
-    void Harvest()
-    {
-        if( m_entityData.TryHarvest())
+        if (entityData.TryHarvest())
         {
-            PlantDefine define = m_entityData.define;
-            this.SendCommand(new AddItemCommond(define.HarvestId,Random.Range(define.HarvestCountMin,define.HarvestCountMax)));
-            if (m_entityData.canReGrow)
+            PlantDefine define = entityData.define;
+            this.SendCommand(new AddItemCommond(define.HarvestId, Random.Range(define.HarvestCountMin, define.HarvestCountMax)));
+            if (entityData.canReGrow)
             {
-                m_entityData.ReGrow();
+                entityData.ReGrow();
             }
             else
             {
@@ -46,8 +35,19 @@ public class Plant : MonoBehaviour,IController,IPointerClickHandler
                 Destroy(gameObject);
             }
         }
-        
+
     }
+    void SwitchAnimation(string path)
+    {
+        anim.SetAnimation(path);
+    }
+
+    void RefreshAnimation()
+    {
+        anim.SetAnimation(entityData.define.Animation[entityData.currentStage]);
+    }
+
+
 
     public IArchitecture GetArchitecture()
     {
@@ -56,6 +56,6 @@ public class Plant : MonoBehaviour,IController,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Harvest();
+        UIManager.instance.ShowPop<PopUIPlantInfo>(new PopUIPlantInfoData(this), transform);
     }
 }

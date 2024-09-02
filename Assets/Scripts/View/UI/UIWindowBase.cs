@@ -5,7 +5,7 @@ using QFramework;
 using UnityEngine.Events;
 using System;
 
-public class UIWindowBase : ViewController
+public class UIWindowBase : MonoBehaviour,IController
 {
     UnityAction<UIWindowBase, Result> OnCloseHanlder;
 
@@ -19,15 +19,11 @@ public class UIWindowBase : ViewController
         Yes,
         No
     }
-    //在第一次加载的时候调用
-    public virtual void OnInit()
+
+    public virtual void OnShow(IUIData showData)
     {
 
     }
-    //public virtual void OnShow()
-    //{
-
-    //}
     public virtual void OnHide()
     {
 
@@ -64,5 +60,10 @@ public class UIWindowBase : ViewController
     public virtual void CloseNo()
     {
         Close(Result.Yes,true);
+    }
+
+    public IArchitecture GetArchitecture()
+    {
+        return ForestRestaurant.Interface;
     }
 }

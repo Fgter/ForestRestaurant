@@ -26,6 +26,7 @@ public class GrowPlantCommond : AbstractCommand<Plant>
         PlantEntityData plantEntityData = new PlantEntityData(plantDefine, soil);
         this.GetSystem<PlantingSystem>().AddPlant(plantEntityData, soil);
         plant.Init(plantEntityData, soil);
+        soil.plant = plant;
         return plant;
     }
 }

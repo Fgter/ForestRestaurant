@@ -9,7 +9,8 @@ public class PlantEntityData
 {
     public Action<string> StageSwitchEvent;
     public int currentStage { get; set; }
-    public bool harvestable { get => currentStage >= m_define.GrowthStageCount-1; }
+    public string currentStageName { get => m_define.StagesName[currentStage]; }
+    public bool harvestable { get => currentStage >= m_define.Animation.Length - 1; }
     public float growedTime { get => TimeConverter.SecondToDay(m_growedTime); }//已经生长了多长时间,天为单位
     public Soil owner { get; set; }//种在哪块土地上
     public int season { get => m_season; }
@@ -47,7 +48,7 @@ public class PlantEntityData
 
     void TryNextStage()
     {
-        if ((m_growedTime / m_matureTime) >= m_define.GrowthPercentPort[currentStage] && !harvestable)//到达突破口并且不可收获则进入下一阶段
+        if (!harvestable && (m_growedTime / m_matureTime) >= m_define.GrowthPercentPort[currentStage+1])//到达突破口并且不可收获则进入下一阶段
         {
             SwitchStage(++currentStage);
         }

@@ -4,10 +4,17 @@
     "Name": "测试",
     "Animation": [
       "Run1",
-      "Run2"
+      "Run2",
+      "Run3"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
     ],
     "GrowthPercentPort": [
-      0.5,
+      0,
+      0.4,
       1
     ],
     "MatureTime": 1.0,
