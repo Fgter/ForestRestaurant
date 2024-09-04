@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
 
-public class PlantingSystem : AbstractSystem //Plant内部更新都以秒为单位，外部更新都以天为单位
+public class PlantingSystem : AbstractSystem 
 {
     Dictionary<Soil, PlantEntityData> plants = new Dictionary<Soil, PlantEntityData>();
     protected override void OnInit()

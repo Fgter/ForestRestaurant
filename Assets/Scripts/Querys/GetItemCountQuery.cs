@@ -2,28 +2,24 @@
 using QFramework;
 using Models;
 
-class EuqalItemCount : AbstractQuery<bool>
+class GetItemCountQuery : AbstractQuery<int>
 {
     int id;
-    int count;
-    public EuqalItemCount(int id,int count)
+    public GetItemCountQuery(int id)
     {
         this.id = id;
-        this.count = count;
     }
-    protected override bool OnDo()
+    protected override int OnDo()
     {
         ItemModel model = this.GetModel<ItemModel>();
         if (model.Items.TryGetValue(id, out Item item))
         {
-            if (item.count >= count)
-                return true;
-            return false;
+            return item.count;
         }
         else
         {
             Debug.LogError("id:" + id + " not in ItemModel");
-            return false;
+            return -1;
         }
     }
 }

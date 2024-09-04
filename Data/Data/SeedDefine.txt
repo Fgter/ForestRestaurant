@@ -4,8 +4,16 @@
     "Name": "测试Item",
     "Description": "测试测试"
   },
-  "2": {},
-  "3": {},
+  "2": {
+    "ID": 2,
+    "Name": "测试Item",
+    "Description": "测试测试"
+  },
+  "3": {
+    "ID": 3,
+    "Name": "测试Item",
+    "Description": "测试测试"
+  },
   "4": {},
   "5": {},
   "6": {},

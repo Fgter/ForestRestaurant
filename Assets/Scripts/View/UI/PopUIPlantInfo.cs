@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Data;
+using Define;
 using System.Text;
 using System;
 using TMPro;

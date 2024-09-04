@@ -11,9 +11,10 @@ public class Test : ViewController,IController
         return ForestRestaurant.Interface;
     }
 
+    [ContextMenu("Test")]
     public void test()
     {
-        
+        this.SendQuery(new GetItemQuery<SeedItem>(3));
     }
 
     private void OnMouseDown()
@@ -24,6 +25,6 @@ public class Test : ViewController,IController
 
     private void Start()
     {
-        this.GetModel<DataModel>();
+        this.GetModel<ItemModel>();
     }
 }

@@ -10,8 +10,8 @@ public class ForestRestaurant : Architecture<ForestRestaurant>
     {
         ResKit.Init();
 
+        RegisterModel<DefineModel>(new DefineModel());
         RegisterModel<ItemModel>(new ItemModel());
-        RegisterModel<DataModel>(new DataModel());
 
         RegisterSystem<TimeSystem>(new TimeSystem());
         RegisterSystem<PlantingSystem>(new PlantingSystem());

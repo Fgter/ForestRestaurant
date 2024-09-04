@@ -2,27 +2,35 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Data;
+using Define;
+using System;
 
 namespace Models
 {
-    class DataModel : AbstractModel
+    class DefineModel : AbstractModel
     {
         public const string DataPath = "Data/Data/";
         protected override void OnInit()
         {
             Load();
         }
+        public Dictionary<Type, dynamic> allDefines = new Dictionary<Type, dynamic>();
 
         public Dictionary<int, ItemDefine> ItemDefines = new Dictionary<int, ItemDefine>();
         public Dictionary<int, PlantDefine> PlantDefines = new Dictionary<int, PlantDefine>();
+        public Dictionary<int, SeedDefine> SeedDefines = new Dictionary<int, SeedDefine>();
 
         void Load()
         {
             string json = File.ReadAllText(DataPath + "ItemDefine.txt");
             ItemDefines = JsonConvert.DeserializeObject<Dictionary<int, ItemDefine>>(json);
+            allDefines.Add(typeof(ItemDefine),ItemDefines);
             json = File.ReadAllText(DataPath + "PlantDefine.txt");
             PlantDefines = JsonConvert.DeserializeObject<Dictionary<int, PlantDefine>>(json);
+            allDefines.Add(typeof(PlantDefine), PlantDefines);
+            json = File.ReadAllText(DataPath + "SeedDefine.txt");
+            SeedDefines = JsonConvert.DeserializeObject<Dictionary<int, SeedDefine>>(json);
+            allDefines.Add(typeof(SeedDefine), SeedDefines);
         }
     }
 }

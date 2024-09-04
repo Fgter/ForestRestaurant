@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
-using Data;
+using Define;
 
 public class GrowPlantCommond : AbstractCommand<Plant>
 {
@@ -20,7 +20,7 @@ public class GrowPlantCommond : AbstractCommand<Plant>
     }
     protected override Plant OnExecute()
     {
-        plantDefine = this.SendQuery(new GetPlantDefineQuery(id));
+        plantDefine = this.SendQuery(new GetDefineQuery<PlantDefine>(id));
         GameObject go = GameObject.Instantiate(prefab,ts);
         Plant plant = go.GetComponent<Plant>();
         PlantEntityData plantEntityData = new PlantEntityData(plantDefine, soil);

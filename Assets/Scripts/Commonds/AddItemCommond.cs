@@ -1,14 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using QFramework;
 using Models;
+using System.Reflection;
 
 public class AddItemCommond : AbstractCommand
 {
     int id;
     int count;
-   public AddItemCommond(int id,int count)
+    public AddItemCommond(int id, int count)
     {
         this.id = id;
         this.count = count;
@@ -23,8 +22,27 @@ public class AddItemCommond : AbstractCommand
         }
         else
         {
-            Item newItem = new Item(this.SendQuery(new GetItemDefineQuery(id)), count);
+            Item newItem = this.SendCommand(new CreateItemCommond(id));
+            newItem.count += count;
             model.Items.Add(id, newItem);
+            MethodInfo method = this.GetType().GetMethod("AddToClassifyItems").MakeGenericMethod(newItem.Type);
+            method.Invoke(this,new object[] { model,newItem});
         }
+    }
+
+    public void AddToClassifyItems<T>(ItemModel model,T newItem)
+    {
+        if (model.classifyItems.TryGetValue(typeof(T), out dynamic dic))
+        {
+            Dictionary<int, T> items = dic as Dictionary<int, T>;
+            items[id] = newItem;
+        }
+        else
+        {
+            Dictionary<int, T> newItems = new Dictionary<int, T>();
+            newItems[id] = newItem;
+            model.classifyItems[typeof(T)] = newItems;
+        }
+       
     }
 }

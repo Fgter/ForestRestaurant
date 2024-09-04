@@ -2,23 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
-using Data;
+using Define;
+using System;
+
+
+public class Item
+{
+    public int count { get; set; }
+    public Type Type { get => this.GetType(); }
+}
+public class SeedItem : Item
+{
+    public SeedDefine define { get; set; }
+    public SeedItem(SeedDefine define)
+    {
+        this.define = define;
+        this.count = 0;
+    }
+}
+
 
 namespace Models
 {
-    public class Item
-    {
-        public ItemDefine define { get; set; }
-        public int count { get; set; }
-        public Item(ItemDefine define, int count)
-        {
-            this.define = define;
-            this.count = count;
-        }
-    }
     public class ItemModel : AbstractModel
     {
-        public Dictionary<int, Item> Items = new Dictionary<int, Item>();
+        public Dictionary<int, Item> Items = new Dictionary<int, Item>();//保存所有Item，方便遍历及更改数量
+
+        public Dictionary<Type, dynamic> classifyItems = new Dictionary<Type, dynamic>();//分类保存Item，方便分类遍历
+
         protected override void OnInit()
         {
 
