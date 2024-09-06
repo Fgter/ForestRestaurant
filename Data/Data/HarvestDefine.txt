@@ -1,30 +1,24 @@
 {
-  "1": {
-    "ID": 1,
-    "Name": "测试种子1",
-    "Description": "种子1种子1种子1",
-    "Icon": "种子1",
-    "TargetPlant": 1001,
-    "UnlockLevel": 0,
-    "TradingPrice": 1
+  "10001": {
+    "ID": 10001,
+    "Name": "收获农作物1",
+    "Description": "收获农作物1收获农作物1收获农作物1",
+    "Icon": "农作物1",
+    "TradingPrice": 100
   },
-  "2": {
-    "ID": 2,
-    "Name": "测试种子2",
-    "Description": "种子2种子2种子2",
-    "Icon": "种子2",
-    "TargetPlant": 1002,
-    "UnlockLevel": 0,
-    "TradingPrice": 1
+  "10002": {
+    "ID": 10002,
+    "Name": "收获农作物2",
+    "Description": "收获农作物1收获农作物1收获农作物2",
+    "Icon": "农作物2",
+    "TradingPrice": 100
   },
-  "3": {
-    "ID": 3,
-    "Name": "测试种子3",
-    "Description": "种子1种子1种子2",
-    "Icon": "种子3",
-    "TargetPlant": 1003,
-    "UnlockLevel": 0,
-    "TradingPrice": 1
+  "10003": {
+    "ID": 10003,
+    "Name": "收获农作物3",
+    "Description": "收获农作物1收获农作物1收获农作物3",
+    "Icon": "农作物3",
+    "TradingPrice": 100
   },
   "4": {},
   "5": {},

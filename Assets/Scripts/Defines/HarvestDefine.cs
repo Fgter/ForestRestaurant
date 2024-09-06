@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 
 namespace Define
 {
-    public enum ItemType
-    {
-        Seed,
-        Harvest,//收获物
-        food,
-    }
-    public class ItemDefine:IDefine
+    public class HarvestDefine:IBagItemDefine
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public ItemType Type { get; set; }
         public string Icon { get; set; }
+        public int TradingPrice { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Define
 {
-    public class PlantDefine:IDefine
+    public class PlantDefine:IOtherItemDefine
     {
         public int Id { get; set; }
         public string Name { get; set; }
