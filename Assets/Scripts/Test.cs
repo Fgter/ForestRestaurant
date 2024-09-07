@@ -15,13 +15,20 @@ public class Test : ViewController,IController
     public void test()
     {
         //this.SendQuery(new GetItemQuery<SeedItem>(3));
-        UIManager.instance.Show<UIBag>(null);
+        //UIManager.instance.Show<UIBag>(null);
+        this.SendCommand<AddItemCommond>(new AddItemCommond(1, 10));
+        this.SendCommand<AddItemCommond>(new AddItemCommond(2, 10));
     }
 
+    [ContextMenu("Test2")]
+    public void test2()
+    {
+        UIManager.instance.Show<UISeedBag>(null);
+    }
     private void OnMouseDown()
     {
-        GetComponent<Soil>().GrowPlant(1001);
-        UIManager.instance.Show<PopUIPlantInfo>(new PopUIPlantInfoData(GetComponent<Soil>().plant));
+        //GetComponent<Soil>().GrowPlant(1001);
+        //UIManager.instance.Show<PopUIPlantInfo>(new PopUIPlantInfoData(GetComponent<Soil>().plant));
         //this.SendCommand<AddItemCommond>(new AddItemCommond(1, 10));
         //this.SendCommand<AddItemCommond>(new AddItemCommond(10001, 10));
        

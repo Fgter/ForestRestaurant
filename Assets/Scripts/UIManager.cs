@@ -30,6 +30,7 @@ public class UIManager : Singleton<UIManager>
     {
         UIResources[typeof(UITest)] = new UIElement { AssetName = PathConfig.UIPath + "UITest" };
         UIResources[typeof(PopUIPlantInfo)] = new UIElement { AssetName = PathConfig.UIPath + "Plant/PopUIPlantInfo" };
+        UIResources[typeof(UISeedBag)] = new UIElement { AssetName = PathConfig.UIPath + "Plant/UISeedBag" };
         UIResources[typeof(UIBag)] = new UIElement { AssetName = PathConfig.UIPath + "Bag/UIBag" };
     }
     public T Show<T>(IUIData data) where T : UIWindowBase

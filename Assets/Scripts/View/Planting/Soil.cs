@@ -13,12 +13,17 @@ public class Soil : MonoBehaviour, IPointerClickHandler,IController
     GameObject m_plantPrefab;
     public void OnPointerClick(PointerEventData eventData)
     {
-       
+        UIManager.instance.Show<UISeedBag>(new UISeedBagData(this));
     }
 
-    public void GrowPlant(int id)
+    public bool GrowPlant(int id)
     {
-        this.SendCommand(new GrowPlantCommond(id, this, m_plantPrefab));
+        if (havePlant)
+            return false;
+        if (this.SendCommand(new GrowPlantCommond(id, this, m_plantPrefab)) != null)
+            return true;
+        else
+            return false;
     }
 
     public IArchitecture GetArchitecture()
