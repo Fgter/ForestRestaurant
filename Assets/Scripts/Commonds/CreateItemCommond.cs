@@ -22,7 +22,8 @@ class CreateItemCommond : AbstractCommand<Item>
                 //Item hi = new Item();
                 return default;
             case int id when (id > 2000 && id < 4000)://是食物
-                return default;
+                FoodItem fi = new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(id)));
+                return fi;
             case int id when (id > 10000):
                 HarvestItem hi = new HarvestItem(this.SendQuery(new GetDefineQuery<HarvestDefine>(id)));
                 return hi;

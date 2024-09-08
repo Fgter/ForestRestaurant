@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
 using Models;
+using Define;
 
 public class Test : ViewController,IController
 {
@@ -17,7 +18,7 @@ public class Test : ViewController,IController
         //this.SendQuery(new GetItemQuery<SeedItem>(3));
         //UIManager.instance.Show<UIBag>(null);
         this.SendCommand<AddItemCommond>(new AddItemCommond(1, 10));
-        this.SendCommand<AddItemCommond>(new AddItemCommond(2, 10));
+        this.SendCommand<AddItemCommond>(new AddItemCommond(2, 10)); 
     }
 
     [ContextMenu("Test2")]
