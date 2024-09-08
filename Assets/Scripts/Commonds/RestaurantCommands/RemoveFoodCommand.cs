@@ -27,6 +27,7 @@ public class RemoveFoodCommand : AbstractCommand
         _item = this.SendCommand(new CreateItemCommond(_id));
         Ls = this.GetModel<FoodMenuModel>();
         bool istype = _item is FoodItem;
+
         if (istype && Ls.SelectFoodMenu.ContainsKey(_id) && !Ls.CanSelectFoodMenu.ContainsKey(_id)) //类型与重复存在判断
         {
             _foodItem = (FoodItem)_item;
@@ -42,13 +43,13 @@ public class RemoveFoodCommand : AbstractCommand
         {
             Fail();
         }
-        Debug.Log(this.GetModel<FoodMenuModel>().SelectFoodMenu.Count + " " + this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Count + " " + this.GetModel<FoodMenuModel>().GoldSum);
     }
     void Succeed()//删除成功后的方法
     {
         Ls.CanSelectFoodMenu.Add(_id, _foodItem);//移除可选择菜单中的值
         Ls.SelectFoodMenu.Remove(_id);//添加至选择菜单中
-        Ls.GoldSum -= _foodItem.define.Price;//添加金币
+        Ls.ExpectedGoldSum -= _foodItem.define.Price;//添加金币
+        this.SendEvent<RestaurantEvent>();
     }
     void Fail()//删除失败后的方法(非类型错误的情况)
     {
