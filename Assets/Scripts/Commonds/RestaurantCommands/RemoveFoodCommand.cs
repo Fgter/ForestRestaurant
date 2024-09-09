@@ -13,9 +13,8 @@ using static UnityEditor.Progress;
 /// </summary>
 public class RemoveFoodCommand : AbstractCommand
 {
-    Item _item;
     FoodItem _foodItem;
-    FoodMenuModel Ls;
+    FoodMenuModel _ls;
     int _id;
     public RemoveFoodCommand(int Id)
     {
@@ -23,21 +22,13 @@ public class RemoveFoodCommand : AbstractCommand
     }
     protected override void OnExecute()
     {
-        Debug.Log("[AddFoodCommand] 删除食物指令触发");
-        _item = this.SendCommand(new CreateItemCommond(_id));
-        Ls = this.GetModel<FoodMenuModel>();
-        bool istype = _item is FoodItem;
-
-        if (istype && Ls.SelectFoodMenu.ContainsKey(_id) && !Ls.CanSelectFoodMenu.ContainsKey(_id)) //类型与重复存在判断
+        Debug.Log("[RemoveFoodCommand] 删除食物指令触发");
+        _foodItem = this.SendQuery(new GetFoodMenuInItemQuery(_id, SelectMenu.FoodMenu));
+        _ls = this.GetModel<FoodMenuModel>();
+        if (_ls != null) //类型与重复存在判断
         {
-            _foodItem = (FoodItem)_item;
             Succeed();
-            Debug.Log("[AddFoodCommand] 删除成功");
-        }
-        //类型错误返回错误日志
-        else if (!istype)
-        {
-            Debug.LogError("[AddFoodCommand] 你所加入的Item不属于FoodItem");
+            Debug.Log("[RemoveFoodCommand] 删除成功");
         }
         else
         {
@@ -46,10 +37,10 @@ public class RemoveFoodCommand : AbstractCommand
     }
     void Succeed()//删除成功后的方法
     {
-        Ls.CanSelectFoodMenu.Add(_id, _foodItem);//移除可选择菜单中的值
-        Ls.SelectFoodMenu.Remove(_id);//添加至选择菜单中
-        Ls.ExpectedGoldSum -= _foodItem.define.Price;//添加金币
-        this.SendEvent<RestaurantEvent>();
+        _ls.CanSelectFoodMenu.Add(_id, _foodItem);//移除可选择菜单中的值
+        _ls.FoodMenu.Remove(_id);//添加至选择菜单中
+        _ls.ExpectedGoldSum -= _foodItem.define.Price;//添加金币
+        this.SendEvent<UpdateFoodMenuUIEvent>();
     }
     void Fail()//删除失败后的方法(非类型错误的情况)
     {

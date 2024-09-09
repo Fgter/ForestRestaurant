@@ -1,7 +1,8 @@
 {
   "2001": {
     "ID": 2001,
-    "Name": "测试",
+    "Name": "测试1",
+    "Icon": "Kiwi",
     "Supplies": [
       10001,
       10002,
@@ -13,11 +14,12 @@
       3
     ],
     "Price": 1,
-    "Description": "测试文本"
+    "Description": "测试文本1"
   },
   "2002": {
     "ID": 2002,
-    "Name": "测试",
+    "Name": "测试2",
+    "Icon": "Melon",
     "Supplies": [
       10001,
       10002,
@@ -29,11 +31,12 @@
       4
     ],
     "Price": 2,
-    "Description": "测试文本"
+    "Description": "测试文本2"
   },
   "2003": {
     "ID": 2003,
-    "Name": "测试",
+    "Name": "测试3",
+    "Icon": "Orange",
     "Supplies": [
       10001,
       10002,
@@ -45,11 +48,12 @@
       5
     ],
     "Price": 3,
-    "Description": "测试文本"
+    "Description": "测试文本3"
   },
   "2004": {
     "ID": 2004,
-    "Name": "测试",
+    "Name": "测试4",
+    "Icon": "Pineapple",
     "Supplies": [
       10001,
       10002,
@@ -61,11 +65,12 @@
       6
     ],
     "Price": 4,
-    "Description": "测试文本"
+    "Description": "测试文本4"
   },
   "2005": {
     "ID": 2005,
-    "Name": "测试",
+    "Name": "测试5",
+    "Icon": "Strawberry",
     "Supplies": [
       10001,
       10002,
@@ -77,11 +82,12 @@
       7
     ],
     "Price": 5,
-    "Description": "测试文本"
+    "Description": "测试文本5"
   },
   "2006": {
     "ID": 2006,
-    "Name": "测试",
+    "Name": "答辩",
+    "Icon": "Feces",
     "Supplies": [
       10001,
       10002,
@@ -93,6 +99,6 @@
       8
     ],
     "Price": 6,
-    "Description": "测试文本"
+    "Description": "不会真有人喜欢吃这个吧?"
   }
 }

@@ -32,6 +32,8 @@ public class UIManager : Singleton<UIManager>
         UIResources[typeof(PopUIPlantInfo)] = new UIElement { AssetName = PathConfig.UIPath + "Plant/PopUIPlantInfo" };
         UIResources[typeof(UISeedBag)] = new UIElement { AssetName = PathConfig.UIPath + "Plant/UISeedBag" };
         UIResources[typeof(UIBag)] = new UIElement { AssetName = PathConfig.UIPath + "Bag/UIBag" };
+        UIResources[typeof(UIFoodMenu)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/UIFoodMenuSet" };
+        UIResources[typeof(UIMessageTip)] = new UIElement { AssetName = PathConfig.UIPath + "UIMessageTip" };
     }
     public T Show<T>(IUIData data) where T : UIWindowBase
     {
@@ -195,9 +197,10 @@ public class UIManager : Singleton<UIManager>
         };
     }
 
-    public void ShowMessageTip(string tip)
+    public UIMessageTip ShowMessageTip(string tip)
     {
         MessageTipData data = new MessageTipData(tip);
-        UIMessageTip ui= Show<UIMessageTip>(data);
+        UIMessageTip ui = Show<UIMessageTip>(data);
+        return ui;
     }
 }

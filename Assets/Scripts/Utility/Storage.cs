@@ -13,7 +13,7 @@ public class Storage : IUtility
             Directory.CreateDirectory(dataPath);
         }
         string path = Path.Combine(dataPath, typeof(T).ToString() + fileName);
-        string json = JsonConvert.SerializeObject(obj);
+        string json = JsonConvert.SerializeObject(obj,new VectorConverter());//VectorConverter处理坐标信息
         File.WriteAllText(path, json);
 #if UNITY_EDITOR
         Debug.Log(path);
@@ -26,7 +26,7 @@ public class Storage : IUtility
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            T data = JsonConvert.DeserializeObject<T>(json);
+            T data = JsonConvert.DeserializeObject<T>(json, new VectorConverter());
             return data;
         }
         else

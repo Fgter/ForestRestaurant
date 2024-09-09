@@ -5,6 +5,7 @@ using QFramework;
 using Models;
 using Define;
 using SaveData;
+using Newtonsoft.Json;
 
 public class Test : ViewController,IController
 {
@@ -45,6 +46,10 @@ public class Test : ViewController,IController
         data.bbb.AddRange(new int[] { 1, 2, 3, 5, 6, 7, 8 });
         data.ccc.Add(1001, new TestSaveData());
         data.ccc.Add(1002, new TestSaveData());
+        data.ddd.Add(new Vector3(0, 0, 0));
+        data.ddd.Add(new Vector3(1, 0, 0));
+        data.ddd.Add(new Vector3(2, 0, 0));
+        data.ddd.Add(new Vector3(3, 0, 0));
         this.GetUtility<Storage>().Save(data);
     }
     [ContextMenu("Test4")]
