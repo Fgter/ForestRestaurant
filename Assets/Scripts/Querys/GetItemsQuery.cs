@@ -13,12 +13,9 @@ using UnityEngine;
         if (model.classifyItems.TryGetValue(typeof(T), out dynamic dic))
         {
             Dictionary<int, T> items = dic as Dictionary<int, T>;
-            List<T> reslut = new List<T>(items.Count);
-            foreach(var item in items.Values)
-            {
-                reslut.Add(item);
-            }
-            return reslut;
+            List<T> result = new List<T>(items.Count);
+            result.AddRange(items.Values);
+            return result;
         }
         else
         {

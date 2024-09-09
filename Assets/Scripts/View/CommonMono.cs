@@ -5,12 +5,16 @@ public class CommonMono : MonoBehaviour
 {
     static Action m_UpdateAction;
     static Action m_FixedUpdateAction;
+    static Action m_QuitAction;
 
     public static void AddUpdateAction(Action fun) => m_UpdateAction += fun;
     public static void RemoveUpdateAction(Action fun) => m_UpdateAction -= fun;
 
     public static void AddFixedUpdateAction(Action fun) => m_FixedUpdateAction += fun;
     public static void RemoveFixedUpdateAction(Action fun) => m_FixedUpdateAction -= fun;
+
+    public static void AddQuitAction(Action fun) => m_QuitAction += fun;
+    public static void RemoveQuitAction(Action fun) => m_QuitAction -= fun;
 
     private void Start()
     {
@@ -24,5 +28,10 @@ public class CommonMono : MonoBehaviour
     private void FixedUpdate()
     {
         m_FixedUpdateAction?.Invoke();
+    }
+
+    private void OnApplicationQuit()
+    {
+        m_QuitAction?.Invoke();
     }
 }

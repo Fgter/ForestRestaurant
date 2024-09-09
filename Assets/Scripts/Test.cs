@@ -4,6 +4,7 @@ using UnityEngine;
 using QFramework;
 using Models;
 using Define;
+using SaveData;
 
 public class Test : ViewController,IController
 {
@@ -33,6 +34,24 @@ public class Test : ViewController,IController
         //this.SendCommand<AddItemCommond>(new AddItemCommond(1, 10));
         //this.SendCommand<AddItemCommond>(new AddItemCommond(10001, 10));
        
+    }
+
+
+    [ContextMenu("Test3")]
+    private void Test3()
+    {
+        TestSaveData data = new TestSaveData();
+        data.aaaa = true;
+        data.bbb.AddRange(new int[] { 1, 2, 3, 5, 6, 7, 8 });
+        data.ccc.Add(1001, new TestSaveData());
+        data.ccc.Add(1002, new TestSaveData());
+        this.GetUtility<Storage>().Save(data);
+    }
+    [ContextMenu("Test4")]
+    private void Test4()
+    {
+        TestSaveData data = this.GetUtility<Storage>().Load<TestSaveData>();
+        Debug.Log(data);
     }
 
     private void Start()

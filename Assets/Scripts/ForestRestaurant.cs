@@ -9,6 +9,8 @@ public class ForestRestaurant : Architecture<ForestRestaurant>
     protected override void Init()
     {
         ResKit.Init();
+        //Utility
+        RegisterUtility<Storage>(new Storage());
         //Model
         RegisterModel<DefineModel>(new DefineModel());
         RegisterModel<ItemModel>(new ItemModel());

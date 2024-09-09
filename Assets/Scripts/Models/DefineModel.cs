@@ -18,6 +18,7 @@ namespace Models
         }
         public Dictionary<Type, dynamic> allDefines = new Dictionary<Type, dynamic>();
 
+        public Dictionary<int, SoilDefine> SoilDefines = new Dictionary<int, SoilDefine>();
         public Dictionary<int, PlantDefine> PlantDefines = new Dictionary<int, PlantDefine>();
         public Dictionary<int, SeedDefine> SeedDefines = new Dictionary<int, SeedDefine>();
         public Dictionary<int, HarvestDefine> HarvestDefines = new Dictionary<int, HarvestDefine>();
@@ -25,7 +26,11 @@ namespace Models
 
         void Load()
         {
-            string json = File.ReadAllText(DataPath + "PlantDefine.txt");
+            string json = File.ReadAllText(DataPath + "SoilDefine.txt");
+            SoilDefines = JsonConvert.DeserializeObject<Dictionary<int, SoilDefine>>(json);
+            allDefines.Add(typeof(SoilDefine), SoilDefines);
+
+            json = File.ReadAllText(DataPath + "PlantDefine.txt");
             PlantDefines = JsonConvert.DeserializeObject<Dictionary<int, PlantDefine>>(json);
             allDefines.Add(typeof(PlantDefine), PlantDefines);
             

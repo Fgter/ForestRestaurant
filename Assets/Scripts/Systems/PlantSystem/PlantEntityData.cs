@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Define;
-using QFramework;
 using System;
+using SaveData;
 
 public class PlantEntityData//Plant内部更新都以秒为单位，外部更新都以天为单位
 {
@@ -32,9 +29,22 @@ public class PlantEntityData//Plant内部更新都以秒为单位，外部更新都以天为单位
         m_matureTime = TimeConverter.DayToSecond(m_define.MatureTime);
     }
 
+    public PlantEntityData()
+    {
+    }
+
+    public void Load(PlantSaveData data,PlantDefine define)
+    {
+        this.currentStage = data.currentStage;
+        this.m_growedTime = data.growedTime;
+        this.m_season = data.season;
+        this.m_define = define;
+        m_matureTime = TimeConverter.DayToSecond(m_define.MatureTime);
+    }
+
     public void Grow()//生长
     {
-        m_growedTime += 20000;
+        m_growedTime += 1;
         TryNextStage();
     }
     public void Grow(float time)//time单位为天(day)

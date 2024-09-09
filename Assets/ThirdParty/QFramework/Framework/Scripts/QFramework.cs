@@ -222,7 +222,7 @@ namespace QFramework
     #region System
 
     public interface ISystem : IBelongToArchitecture, ICanSetArchitecture, ICanGetModel, ICanGetUtility,
-        ICanRegisterEvent, ICanSendEvent, ICanGetSystem, ICanInit
+        ICanRegisterEvent, ICanSendEvent, ICanGetSystem, ICanInit,ICanSendQuery
     {
     }
 

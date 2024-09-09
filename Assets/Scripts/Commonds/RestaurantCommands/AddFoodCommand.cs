@@ -8,8 +8,8 @@ using UnityEngine;
 /// </summary>
 public class AddFoodCommand : AbstractCommand
 {
-    Item _item { get; set; }
-    FoodItem _foodItem { get; set; }
+    Item _item;
+    FoodItem _foodItem;
     FoodMenuModel Ls;
     int _id;
     public AddFoodCommand(int Id)
