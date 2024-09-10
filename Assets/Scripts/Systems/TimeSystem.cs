@@ -35,7 +35,7 @@ public class TimeSystem : AbstractSystem
     public float GetOfflinePeriod()//获取下线时间的长度(day)
     {
         if (_lastExitTime != null)
-            return TimeConverter.SecondToDay((DateTime.Now - _lastExitTime).Seconds);
+            return TimeConverter.SecondToDay((float)(DateTime.Now - _lastExitTime).TotalSeconds);
         else
             return 0;
     }
