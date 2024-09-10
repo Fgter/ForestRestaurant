@@ -13,7 +13,7 @@ public class Test2 : MonoBehaviour
         //UIManager.instance.ShowMessageTip("这是一个消息").SetType(MessageType.Error);
         //UIManager.instance.ShowMessageTip("这是一个消息").SetType(MessageType.Warning);
         //UIManager.instance.ShowMessageTip("这是一个消息").SetType(MessageType.Finish);
-        UIManager.instance.ShowMessageTip("这是一个消息").SetIcon(ResLoader.Load<Sprite>(PathConfig.SpritePath + "Feces")).AddFunction(() => {  Debug.Log("显示"); });
+        UIManager.instance.ShowMessageTip("这是一个消息").SetIcon(ResLoader.LoadSprite("Feces")).AddFunction(() => {  Debug.Log("显示"); });
     }
 
     // Update is called once per frame

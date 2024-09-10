@@ -7,22 +7,22 @@ using Define;
 
 public class Soil : MonoBehaviour, IPointerClickHandler, IController
 {
-    public int Id { get => 0; }
-    public bool havePlant { get => plant != null; }
-    public Plant plant { get; set; }
-
+    public SoilEntityData data { get => _data; }
+    SoilEntityData _data;
     [SerializeField]
     GameObject m_plantPrefab;
-    [SerializeField]
-    SoilDefine define;
     public void OnPointerClick(PointerEventData eventData)
     {
         UIManager.instance.Show<UISeedBag>(new UISeedBagData(this));
     }
+    public void Init(SoilEntityData data)
+    {
+        _data = data;
+    }
 
     public bool GrowPlant(int id)
     {
-        if (havePlant)
+        if (_data.havePlant)
             return false;
         if (this.SendCommand(new GrowPlantCommond(id, this, m_plantPrefab)) != null)
             return true;

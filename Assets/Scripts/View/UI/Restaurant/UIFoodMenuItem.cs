@@ -37,7 +37,7 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
 
     public void SetFoodItem(FoodItem foodItem,Action action = null)
     {
-        icon.sprite = ResLoader.Load<Sprite>(PathConfig.SpritePath+foodItem.define.Icon);
+        icon.sprite = ResLoader.LoadSprite(foodItem.define.Icon);
         description.text = foodItem.define.Description;
         name.text = foodItem.define.Name;
         for (int i = 0;i<foodItem.define.Supplies.Count;i++)
@@ -50,7 +50,7 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
     {
         GameObject go = Instantiate(UIFoodSuppliesPrefab, SuppliesList.transform);
         //Item a = this.SendQuery(new GetItemQuery<Item>(Id));//这里暂时这样写
-        go.transform.GetChild(0).GetComponent<Image>().sprite = ResLoader.Load<Sprite>(PathConfig.SpritePath + "Pineapple");
+        go.transform.GetChild(0).GetComponent<Image>().sprite = ResLoader.LoadSprite("Pineapple");
         go.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = $"X{sum}";
         SuppliesListPrefabs.Add(go);
     }

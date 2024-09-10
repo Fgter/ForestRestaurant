@@ -26,7 +26,7 @@ public class Test : ViewController,IController
     [ContextMenu("Test2")]
     public void test2()
     {
-        UIManager.instance.Show<UISeedBag>(null);
+        UIManager.instance.Show<UIBag>(null);
     }
     private void OnMouseDown()
     {

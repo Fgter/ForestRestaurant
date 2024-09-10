@@ -13,4 +13,9 @@ public class ResLoader
     {
         return Resources.LoadAll<T>(path);
     }
+
+    public static Sprite LoadSprite(string spriteName)
+    {
+        return Load<Sprite>(PathConfig.SpritePath + spriteName);
+    }
 }

@@ -1,7 +1,8 @@
 using UnityEngine;
 using System;
+using QFramework;
 
-public class CommonMono : MonoBehaviour
+public class CommonMono : MonoBehaviour,IController
 {
     static Action m_UpdateAction;
     static Action m_FixedUpdateAction;
@@ -20,6 +21,11 @@ public class CommonMono : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
     }
+
+    private void Awake()
+    {
+        this.GetArchitecture();
+    }
     private void Update()
     {
         m_UpdateAction?.Invoke();
@@ -33,5 +39,10 @@ public class CommonMono : MonoBehaviour
     private void OnApplicationQuit()
     {
         m_QuitAction?.Invoke();
+    }
+
+    public IArchitecture GetArchitecture()
+    {
+        return ForestRestaurant.Interface;
     }
 }

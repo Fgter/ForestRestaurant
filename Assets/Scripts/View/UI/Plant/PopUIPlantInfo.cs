@@ -7,7 +7,7 @@ using System.Text;
 using System;
 using TMPro;
 
-public class PopUIPlantInfoData:IUIData
+public class PopUIPlantInfoData : IUIData
 {
     public PopUIPlantInfoData(Plant plant)
     {
@@ -66,7 +66,7 @@ public class PopUIPlantInfo : UIWindowBase
     }
     void RefreshUI()
     {
-        if (m_plant==null || m_data == null || m_define == null)
+        if (m_plant == null || m_data == null || m_define == null)
             return;
         m_name.text = m_define.Name;
         m_season.text = FormatSeason(m_data.season, m_define.SeasonCount);
@@ -80,7 +80,7 @@ public class PopUIPlantInfo : UIWindowBase
         SetPercent();
         m_btnHarvest.interactable = m_data.harvestable;
     }
-    string FormatSeason(int currentSeason,int seasonCount)
+    string FormatSeason(int currentSeason, int seasonCount)
     {
         m_sb.Clear();
         m_sb.AppendFormat("第{0}/{1}季", currentSeason, seasonCount);
@@ -104,23 +104,24 @@ public class PopUIPlantInfo : UIWindowBase
     string FormatTime(float time)
     {
         TimeSpan t = TimeSpan.FromDays(time);
-        
+        double totalSeconds = Math.Round(t.TotalSeconds);
+        TimeSpan roundedTimespawn = TimeSpan.FromSeconds(totalSeconds);
         m_sb.Clear();
-        m_sb.AppendFormat("{0} 后进入下一生长阶段", t.ToString(@"hh\:mm\:ss"));
+        m_sb.AppendFormat("{0} 后进入下一生长阶段", roundedTimespawn.ToString(@"hh\:mm\:ss"));
         return m_sb.ToString();
     }
 
     float GetPercent()
     {
         float percent = m_data.growedTime / m_define.MatureTime;
-        return percent > 1 ? 1 : percent ;
+        return percent > 1 ? 1 : percent;
     }
 
     void SetPercent()
     {
         float percent = GetPercent();
         m_sb.Clear();
-        m_sb.AppendFormat("{0}%", MathF.Round(percent * 100,2));
+        m_sb.AppendFormat("{0}%", MathF.Round(percent * 100, 2));
         m_progressText.text = m_sb.ToString();
         m_proress.fillAmount = percent;
     }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Models;
 using UnityEngine;
 using QFramework;
 using Define;
@@ -23,10 +22,10 @@ public class GrowPlantCommond : AbstractCommand<Plant>
         plantDefine = this.SendQuery(new GetDefineQuery<PlantDefine>(id));
         GameObject go = GameObject.Instantiate(prefab,ts);
         Plant plant = go.GetComponent<Plant>();
-        PlantEntityData plantEntityData = new PlantEntityData(plantDefine, soil);
-        this.GetSystem<PlantingSystem>().AddPlant(plantEntityData, soil);
-        plant.Init(plantEntityData, soil);
-        soil.plant = plant;
+        PlantEntityData plantEntityData = new PlantEntityData(plantDefine, soil.data);
+        this.GetModel<PlantModel>().AddPlant(plantEntityData, soil.data.Id);
+        plant.Init(plantEntityData, soil.data);
+        soil.data.plant = plant.entityData;
         return plant;
     }
 }

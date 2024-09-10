@@ -29,7 +29,7 @@ public class UISeedBagItem : MonoBehaviour,IController
     public void SetItem(SeedItem item, int count,UISeedBag owner)
     {
         this.item = item;
-        this.icon.overrideSprite = ResLoader.Load<Sprite>(PathConfig.SpritePath + this.item.define.Icon);
+        this.icon.overrideSprite = ResLoader.LoadSprite(this.item.define.Icon);
         this.count.text = count.ToString();
         this.Name.text = this.item.define.Name;
         this.description.text = this.item.define.Description;

@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 
 public class Plant : MonoBehaviour,IController,IPointerClickHandler
 {
-    public Soil soil { get; private set; }
+    public SoilEntityData soil { get; private set; }
     public PlantEntityData entityData { get; private set; }
     AnimationPlayer anim;
 
-    public void Init(PlantEntityData entityData,Soil soil)
+    public void Init(PlantEntityData entityData,SoilEntityData soil)
     {
         this.entityData = entityData;
         this.soil = soil;
