@@ -1,13 +1,10 @@
-﻿using System;
-using QFramework;
+﻿using QFramework;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
@@ -17,13 +14,13 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
     [SerializeField]
     TMP_Text description;
     [SerializeField]
-    TMP_Text name;
+    TMP_Text Name;
     [SerializeField]
     GameObject SuppliesList;
     [SerializeField]
     GameObject UIFoodSuppliesPrefab;
     [SerializeField]
-    List<GameObject> SuppliesListPrefabs = new();
+    List<UIFoodMenuItemItem> SuppliesListPrefabs = new();
     Action action;
     public IArchitecture GetArchitecture()
     {
@@ -39,20 +36,46 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
     {
         icon.sprite = ResLoader.LoadSprite(foodItem.define.Icon);
         description.text = foodItem.define.Description;
-        name.text = foodItem.define.Name;
-        for (int i = 0;i<foodItem.define.Supplies.Count;i++)
+        Name.text = foodItem.define.Name;
+        if(SuppliesListPrefabs.Count< foodItem.define.Supplies.Count)
         {
-            CreateSupplies(foodItem.define.Supplies[i], foodItem.define.Sum[i]);
+            for (int i = 0; i < foodItem.define.Supplies.Count; i++)
+            {
+                if (SuppliesListPrefabs.Count <= i)
+                {
+                    CreateSupplies(foodItem.define.Supplies[i], foodItem.define.Sum[i]);
+                    continue;
+                }
+                SetSupplies(SuppliesListPrefabs[i], foodItem.define.Supplies[i], foodItem.define.Sum[i]);
+                SuppliesListPrefabs[i].gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < SuppliesListPrefabs.Count; i++)
+            {
+                if (foodItem.define.Supplies.Count <= i)
+                {
+                    SuppliesListPrefabs[i].gameObject.SetActive(false);
+                    continue;
+                }
+                SetSupplies(SuppliesListPrefabs[i], foodItem.define.Supplies[i], foodItem.define.Sum[i]);
+                SuppliesListPrefabs[i].gameObject.SetActive(true);
+            }
         }
         this.action = action;
     }
     void CreateSupplies(int Id,int sum)
     {
-        GameObject go = Instantiate(UIFoodSuppliesPrefab, SuppliesList.transform);
+        UIFoodMenuItemItem go = Instantiate(UIFoodSuppliesPrefab, SuppliesList.transform).GetComponent<UIFoodMenuItemItem>();
         //Item a = this.SendQuery(new GetItemQuery<Item>(Id));//这里暂时这样写
-        go.transform.GetChild(0).GetComponent<Image>().sprite = ResLoader.LoadSprite("Pineapple");
-        go.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = $"X{sum}";
+        SetSupplies(go, Id,sum);
         SuppliesListPrefabs.Add(go);
+    }
+    void SetSupplies(UIFoodMenuItemItem go, int id,int sum)
+    {
+        go.Set($"X{sum}", ResLoader.Load<Sprite>(PathConfig.SpritePath + "Pineapple"));
+
     }
 }
 

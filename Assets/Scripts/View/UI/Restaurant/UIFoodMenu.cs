@@ -1,12 +1,15 @@
-﻿using QFramework;
+﻿using Models;
+using QFramework;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class UIFoodMenu : UIWindowBase
 {
+    [SerializeField]
+    Button Handoff;
     [SerializeField]
     Button Back;
     [SerializeField]
@@ -22,70 +25,111 @@ public class UIFoodMenu : UIWindowBase
     [SerializeField]
     GameObject FoodMenuRoot;
     [SerializeField]
-    List<GameObject> UIFoodItems = new();
+    List<UIFoodMenuItem> UIFoodItems = new();
     [SerializeField]
-    List<GameObject> UICanSelectMenus = new();
+    List<UIFoodMenuItem> UICanSelectMenus = new();
     public override void OnShow(IUIData showData)
     {
         ShowUpdate();
-        Debug.Log("执行");
         this.RegisterEvent<UpdateFoodMenuUIEvent>(v => { ShowUpdate(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
-        Back.onClick.AddListener(() =>
+        Handoff.onClick.RemoveAllListeners();
+        Back.onClick.RemoveAllListeners();
+        Handoff.onClick.AddListener(() =>
         {
             if (CanSelectMenuRoot.activeInHierarchy)
             {
                 CanSelectMenuRoot.SetActive(false);
-                FoodMenu.SetActive(true);
+                FoodMenuRoot.SetActive(true);
             }
             else
             {
                 CanSelectMenuRoot.SetActive(true);
-                FoodMenu.SetActive(false);
+                FoodMenuRoot.SetActive(false);
             }
+        });
+        Back.onClick.AddListener(() =>
+        {
+            UIManager.instance.Close(typeof(UIFoodMenu));
         });
     }
     void ShowUpdate()
     {
-        RemoveAllFoodItem();
-        foreach (var item in this.SendQuery(new GetCanSelectFoodMenuQuery(SelectMenu.CanSelectMenu)))
-        {
-            CreateFoodItem(item,SelectMenu.CanSelectMenu);
-        }
-        foreach (var item in this.SendQuery(new GetCanSelectFoodMenuQuery(SelectMenu.FoodMenu)))
-        {
-            CreateFoodItem(item, SelectMenu.FoodMenu);
-        }
+        UpdateList(SelectMenu.FoodMenu);
+        UpdateList(SelectMenu.CanSelectMenu);
         Gold.text = $"预计收益：{this.GetModel<FoodMenuModel>().ExpectedGoldSum}";
     }
-    void CreateFoodItem(FoodItem foodItem,SelectMenu selectMenu)
+    void CreateFoodItem(FoodItem foodItem,SelectMenu selectMenu)//仅用于添加没有的UI
     {
         GameObject go;
+        UIFoodMenuItem ls;
         switch (selectMenu)
         {
             case SelectMenu.CanSelectMenu:
                 go = Instantiate(UIFoodItemPrefab, CanSelectMenu.transform);
-                go.GetComponent<UIFoodMenuItem>().SetFoodItem(foodItem, () => { this.SendCommand(new AddFoodCommand(foodItem.define.Id)); });
-                UICanSelectMenus.Add(go);
+                ls = go.GetComponent<UIFoodMenuItem>();
+                ls.SetFoodItem(foodItem, SelectCommand(foodItem,selectMenu));
+                UICanSelectMenus.Add(ls);
                 break;
             case SelectMenu.FoodMenu:
                 go = Instantiate(UIFoodItemPrefab, FoodMenu.transform);
-                go.GetComponent<UIFoodMenuItem>().SetFoodItem(foodItem, () => { this.SendCommand(new RemoveFoodCommand(foodItem.define.Id)); });
-                UIFoodItems.Add(go);
+                ls = go.GetComponent<UIFoodMenuItem>();
+                ls.SetFoodItem(foodItem, SelectCommand(foodItem, selectMenu));
+                UIFoodItems.Add(ls);
                 break;
         }
     }
-    void RemoveAllFoodItem()
+    List<UIFoodMenuItem> ls;
+    void UpdateList(SelectMenu selectMenu)
     {
-        foreach (GameObject go in UIFoodItems)
+        List<FoodItem> foodItems = this.SendQuery(new GetFoodMenuQuery(selectMenu));
+        switch (selectMenu)
         {
-            Destroy(go);
+            case (SelectMenu.FoodMenu):
+                ls = UIFoodItems;
+                break;
+            case (SelectMenu.CanSelectMenu):
+                ls = UICanSelectMenus;
+                break;
         }
-        foreach (GameObject go in UICanSelectMenus)
+        if (foodItems.Count > ls.Count) //数量小于对应的Model则更新并添加新的对象
         {
-            Destroy(go);
+            for (int i = 0; i < foodItems.Count; i++)
+            {
+                if (i>=ls.Count)
+                {
+                    CreateFoodItem(foodItems[i], selectMenu);
+                    continue;
+                }
+                ls[i].gameObject.SetActive(true);
+                ls[i].SetFoodItem(foodItems[i], SelectCommand(foodItems[i], selectMenu));
+            }
         }
-        UIFoodItems.Clear();
-        UICanSelectMenus.Clear();
+        else//数量大于对应的Model则仅设置对象的开关
+        {
+            for (int i = 0; i < ls.Count; i++)
+            {
+                if (i >= foodItems.Count)
+                {
+                    ls[i].gameObject.SetActive(false);
+                    continue;
+                }
+                ls[i].gameObject.SetActive(true);
+                ls[i].SetFoodItem(foodItems[i], SelectCommand(foodItems[i], selectMenu));
+            }
+        }
+    }
+    Action SelectCommand(FoodItem foodItem,SelectMenu selectMenu)
+    {
+        switch (selectMenu)
+        {
+            case (SelectMenu.FoodMenu):
+                return () => { this.SendCommand(new RemoveFoodCommand(foodItem.define.Id)); };
+            case (SelectMenu.CanSelectMenu):
+                return () => { this.SendCommand(new AddFoodCommand(foodItem.define.Id)); };
+            default:
+                return () => { };
+        }
+        
     }
 }
 public enum SelectMenu

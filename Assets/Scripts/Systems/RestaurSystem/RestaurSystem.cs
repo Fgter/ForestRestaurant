@@ -9,9 +9,7 @@ public class RestaurSystem : AbstractSystem
 {
     protected override void OnInit()
     {
-
-        this.RegisterEvent<UpdateFoodMenuUIEvent>(v => { 
-            
+        this.RegisterEvent<UpdateFoodMenuUIEvent>(v => {    
         });
     }
 }

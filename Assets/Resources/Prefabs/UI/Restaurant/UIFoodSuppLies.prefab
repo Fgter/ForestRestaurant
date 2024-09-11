@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 5820213256922891241}
   - component: {fileID: 5820213256922891243}
   - component: {fileID: 5820213256922891240}
+  - component: {fileID: -7212562465983281291}
   m_Layer: 5
   m_Name: UIFoodSuppLies
   m_TagString: Untagged
@@ -154,6 +155,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-7212562465983281291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820213256922891238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07da18a47e996544b8efb6c92d5c26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 5820213257193250247}
+  image: {fileID: 5820213256621526942}
 --- !u!1 &5820213257193250245
 GameObject:
   m_ObjectHideFlags: 0

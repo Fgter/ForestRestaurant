@@ -1,13 +1,13 @@
 using QFramework;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerModel : AbstractModel
+namespace Models
 {
-    public int Gold { get; set; }//金币数量
-    protected override void OnInit()
+    public class PlayerModel : AbstractModel
     {
-        
+        public int Gold { get; set; }//金币数量
+        protected override void OnInit()
+        {
+
+        }
     }
+
 }

@@ -39,7 +39,7 @@ public class UIMessageTip : UIWindowBase
                 Debug.LogError("[UIMessageTip] 传入的类型不正确");
             }
         }
-        action += () => { UIManager.instance.Close(typeof(UIMessageTip)); };
+        action = () => { UIManager.instance.Close(typeof(UIMessageTip)); };
         btn.onClick.AddListener(() =>
         {
             action?.Invoke();

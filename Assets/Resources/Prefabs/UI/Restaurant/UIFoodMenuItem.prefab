@@ -486,7 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 5135357789807033692}
   description: {fileID: 5135357789451404880}
-  name: {fileID: 5135357790473076839}
+  Name: {fileID: 5135357790473076839}
   SuppliesList: {fileID: 5135357789468382247}
   UIFoodSuppliesPrefab: {fileID: 5820213256922891238, guid: 810812e750622be47b5746f429ef82c5, type: 3}
   SuppliesListPrefabs: []
