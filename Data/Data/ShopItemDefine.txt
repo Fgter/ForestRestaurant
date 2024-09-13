@@ -1,0 +1,61 @@
+{
+  "1": {
+    "1": {
+      "ItemId": 1,
+      "SellCount": 5,
+      "RefreshTime": 6.0,
+      "Price": 100,
+      "Description": "不是个好东西"
+    },
+    "2": {
+      "ItemId": 2,
+      "RefreshTime": 7.0
+    },
+    "3": {
+      "ItemId": 3,
+      "RefreshTime": 8.0
+    },
+    "4": {
+      "ItemId": 4,
+      "RefreshTime": 9.0
+    },
+    "5": {
+      "ItemId": 5,
+      "RefreshTime": 10.0
+    },
+    "6": {
+      "ItemId": 6,
+      "RefreshTime": 11.0
+    }
+  },
+  "2": {
+    "7": {
+      "ItemId": 7,
+      "RefreshTime": 12.0
+    }
+  },
+  "3": {
+    "8": {
+      "ItemId": 8,
+      "RefreshTime": 13.0
+    }
+  },
+  "4": {
+    "9": {
+      "ItemId": 9,
+      "RefreshTime": 14.0
+    }
+  },
+  "5": {
+    "10": {
+      "ItemId": 10,
+      "RefreshTime": 15.0
+    }
+  },
+  "6": {
+    "11": {
+      "ItemId": 11,
+      "RefreshTime": 16.0
+    }
+  }
+}

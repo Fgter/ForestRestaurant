@@ -3,10 +3,10 @@ namespace Models
 {
     public class PlayerModel : AbstractModel
     {
-        public int Gold { get; set; }//½ð±ÒÊýÁ¿
+        public BindableProperty<int> Gold = new BindableProperty<int>();
         protected override void OnInit()
         {
-
+            
         }
     }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Define
 {
-    public class SeedDefine : IBagItemDefine
+    public class SeedDefine : IIconItemDefine
     {
         public int Id { get; set; }
         public string Name { get; set; }

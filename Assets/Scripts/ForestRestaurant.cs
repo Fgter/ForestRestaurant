@@ -10,16 +10,17 @@ public class ForestRestaurant : Architecture<ForestRestaurant>
     {
         ResKit.Init();
         //Utility
-        RegisterUtility<Storage>(new Storage());
+        RegisterUtility(new Storage());
         //Model
-        RegisterModel<DefineModel>(new DefineModel());
-        RegisterModel<ItemModel>(new ItemModel());
-        RegisterModel<PlantModel>(new PlantModel());
-        RegisterModel<FoodMenuModel>(new FoodMenuModel());
-        RegisterModel<PlayerModel>(new PlayerModel());
+        RegisterModel(new DefineModel());
+        RegisterModel(new ItemModel());
+        RegisterModel(new PlantModel());
+        RegisterModel(new FoodMenuModel());
+        RegisterModel(new PlayerModel());
+        RegisterModel(new ShopModel());
         //System
-        RegisterSystem<TimeSystem>(new TimeSystem());
-        RegisterSystem<PlantingSystem>(new PlantingSystem());
+        RegisterSystem(new TimeSystem());
+        RegisterSystem(new PlantingSystem());
 
     }
 }

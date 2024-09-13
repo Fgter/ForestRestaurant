@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Define
 {
-    public class FoodDefine : IBagItemDefine
+    public class FoodDefine : IIconItemDefine
     {
         public int Id { get; set; }
         public string Name { get; set; }

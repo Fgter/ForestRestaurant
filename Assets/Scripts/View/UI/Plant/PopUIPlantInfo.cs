@@ -107,7 +107,7 @@ public class PopUIPlantInfo : UIWindowBase
         double totalSeconds = Math.Round(t.TotalSeconds);
         TimeSpan roundedTimespawn = TimeSpan.FromSeconds(totalSeconds);
         m_sb.Clear();
-        m_sb.AppendFormat("{0} 后进入下一生长阶段", roundedTimespawn.ToString(@"hh\:mm\:ss"));
+        m_sb.AppendFormat("{0}:{1}:{2} 后进入下一生长阶段", roundedTimespawn.Days * 24 + roundedTimespawn.Hours, roundedTimespawn.Minutes, roundedTimespawn.Seconds);
         return m_sb.ToString();
     }
 

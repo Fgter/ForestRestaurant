@@ -10,7 +10,7 @@ public class CollectRestaurantGoldCommand : AbstractCommand
     {
         _playerModel = this.GetModel<PlayerModel>();
         _foodMenuModel = this.GetModel<FoodMenuModel>();
-        _playerModel.Gold += _foodMenuModel.GoldSum;
+        _playerModel.Gold.Value += _foodMenuModel.GoldSum;
         Debug.Log($"[CollectRestaurantGoldCommand] 收取成功 玩家当前金币数量为{_playerModel.Gold}");
     }
 }

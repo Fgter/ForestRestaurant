@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Define
 {
-    public class SpecialtyDefine : IBagItemDefine
+    public class SpecialtyDefine : IIconItemDefine
     {
         public int Id { get; set; }
         public string Name { get; set; }

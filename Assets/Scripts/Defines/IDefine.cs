@@ -8,10 +8,9 @@ namespace Define
 {
     public interface IDefine
     {
-        public int Id { get; set; }
     }
 
-    public interface IBagItemDefine:IDefine //给可以在背包中显示出来的物品用的
+    public interface IIconItemDefine:IDefine //给可以在背包中显示出来的物品用的
     {
         public string Name { get; set; }
         public string Description { get; set; }
