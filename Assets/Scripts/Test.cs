@@ -10,6 +10,7 @@ using System;
 
 public class Test : ViewController,IController
 {
+    public GameObject prefab;
     public IArchitecture GetArchitecture()
     {
         return ForestRestaurant.Interface;
@@ -42,18 +43,7 @@ public class Test : ViewController,IController
     [ContextMenu("Test3")]
     private void Test3()
     {
-        //TestSaveData data = new TestSaveData();
-        //data.aaaa = true;
-        //data.bbb.AddRange(new int[] { 1, 2, 3, 5, 6, 7, 8 });
-        //data.ccc.Add(1001, new TestSaveData());
-        //data.ccc.Add(1002, new TestSaveData());
-        //data.ddd.Add(new Vector3(0, 0, 0));
-        //data.ddd.Add(new Vector3(1, 0, 0));
-        //data.ddd.Add(new Vector3(2, 0, 0));
-        //data.ddd.Add(new Vector3(3, 0, 0));
-        //this.GetUtility<Storage>().Save(data);
-        TimeSpan t = new TimeSpan(1, 5, 10, 20);
-        Debug.Log(string.Format( "{0}:{1}:{2} 后进入下一生长阶段", t.Days * 24 + t.Hours, t.Minutes, t.Seconds));
+        this.GetComponent<AnimationPlayer>().SetAnimation("Run2");
     }
     [ContextMenu("Test4")]
     private void Test4()

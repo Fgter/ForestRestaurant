@@ -64,7 +64,7 @@ namespace Models
                 Type keyValueType = dicProp.PropertyType;
                 Type valueType = keyValueType.GetGenericArguments()[1];//value的类型
                 var convertDict = Convert.ChangeType(dictInstance, dictType);//转换类型后的字典
-                allDefines.Add(valueType, convertDict);////////////添加allDefines字典
+                allDefines.Add(valueType, convertDict);///////////////////////////////////////添加allDefines字典
                 #region
                 //////////添加iconItemDefines字典
                 //if (Array.Exists(valueType.GetInterfaces(), i => i == typeof(IIconItemDefine)))

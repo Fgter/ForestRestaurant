@@ -14,9 +14,9 @@ class GetShopItemsQuery : AbstractQuery<List<ShopItem>>
     {
         ShopModel model = this.GetModel<ShopModel>();
         List<ShopItem> result = new List<ShopItem>();
-        if (model.shopItems.ContainsKey(id))
+        if (model.shopItemDict.ContainsKey(id))
         {
-            result.AddRange(model.shopItems[id].Values);
+            result.AddRange(model.shopItemDict[id].Values);
             return result;
         }
         Debug.LogError(string.Format("ShopModel中没有找到id为{0}的商店", id));

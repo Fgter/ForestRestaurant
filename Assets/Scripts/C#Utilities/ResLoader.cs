@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class ResLoader
@@ -17,5 +18,10 @@ public class ResLoader
     public static Sprite LoadSprite(string spriteName)
     {
         return Load<Sprite>(PathConfig.SpritePath + spriteName);
+    }
+
+    public static Sprite[] LoadSpriteAnimation(string spriteName)
+    {
+        return LoadAll<Sprite>(PathConfig.AnimationPath + spriteName);
     }
 }

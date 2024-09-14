@@ -40,6 +40,15 @@ public class TimeSystem : AbstractSystem
             return 0;
     }
 
+    public bool JudgeIsNextDayClock(float clock)
+    {
+        DateTime currentTime = DateTime.Now;
+        DateTime nextDayTime = _lastExitTime.AddDays(1).Date.AddHours(clock);
+        if (currentTime > nextDayTime)
+            return true;
+        return false;
+    }
+
     void OnQuit()
     {
         Save();

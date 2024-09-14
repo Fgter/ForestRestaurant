@@ -21,6 +21,7 @@ public class ForestRestaurant : Architecture<ForestRestaurant>
         //System
         RegisterSystem(new TimeSystem());
         RegisterSystem(new PlantingSystem());
+        RegisterSystem(new ShopSystem());
 
     }
 }

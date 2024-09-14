@@ -16,11 +16,11 @@ class GetShopItemQuery : AbstractQuery<ShopItem>
     protected override ShopItem OnDo()
     {
         ShopModel model = this.GetModel<ShopModel>();
-        if (model.shopItems.ContainsKey(shopId))
+        if (model.shopItemDict.ContainsKey(shopId))
         {
-            if (model.shopItems[shopId].ContainsKey(shopItemId))
+            if (model.shopItemDict[shopId].ContainsKey(shopItemId))
             {
-                return model.shopItems[shopId][shopItemId];
+                return model.shopItemDict[shopId][shopItemId];
             }
             else
             {

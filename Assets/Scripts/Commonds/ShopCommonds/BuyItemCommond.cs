@@ -15,7 +15,7 @@ class BuyItemCommond : AbstractCommand<bool>
     }
     protected override bool OnExecute()
     {
-        var shopItem = this.GetModel<ShopModel>().shopItems[shopId][shopItemId];
+        var shopItem = this.GetModel<ShopModel>().shopItemDict[shopId][shopItemId];
         int price = shopItem.define.Price * count;
         if (shopItem.count < count)
             return false;
