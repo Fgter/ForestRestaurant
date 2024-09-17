@@ -15,8 +15,7 @@ public class UnlockFoodCommand : AbstractCommand
         FoodItem _foodItem = new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(_id)));
         if(_foodItem != null)
         {
-            this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Add(_id, _foodItem);
-            this.SendEvent<UpdateFoodMenuUIEvent>();
+            this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Value.Add(_id, _foodItem);
         }
         else
         {

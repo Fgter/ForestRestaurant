@@ -2,20 +2,21 @@
 using QFramework;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 /// <summary>
 /// 出售食物的指令返回值为一个缺失的食物以及数量
 /// </summary>
-public class SellFoodCommand : AbstractCommand<Dictionary<Item, int>>
+public class SellFoodCommand : AbstractCommand
 {
     int _id;
     bool istf = false;//是否能出售
     ItemModel _itemModel;
-    static Dictionary<Item, int> _itemdic;
+    static Dictionary<Item, int> _itemdic;//存储的是缺少的材料
     public SellFoodCommand(int id) {
         _id = id;
     }
-    protected override Dictionary<Item, int> OnExecute()
+    protected override void OnExecute()
     {
         if (_itemdic == null)
         {
@@ -27,8 +28,8 @@ public class SellFoodCommand : AbstractCommand<Dictionary<Item, int>>
         _itemModel = this.GetModel<ItemModel>();
         if(foodItem == null)
         {
-            //预留
-            return null;//查询不到对应的食物
+            Fail("该食物不在餐厅菜单中");
+            return;//查询不到对应的食物
         }
         foreach(int i in foodItem.define.Supplies)
         {
@@ -45,9 +46,24 @@ public class SellFoodCommand : AbstractCommand<Dictionary<Item, int>>
         }
         if (istf)
         {
-            return _itemdic;
+            Fail("缺少必要的材料",true);
+            return;
         }
-        return null;
+        //成功
+        this.SendCommand(new IncreaseGoldCommond(foodItem.define.Price));
+
+        return;
+    }
+    void Fail(string massage,bool MaterialsAreMissing = false)//临时:无
+    {
+        if (MaterialsAreMissing)//缺少材料的方法
+        {
+
+        }
+        else//不缺少的方法
+        {
+
+        }
     }
     void Run(int id,FoodItem foodItem,int index)
     {

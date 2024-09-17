@@ -18,9 +18,9 @@ public class GetFoodMenuInItemQuery : AbstractQuery<FoodItem>
         switch (_selectMenu)
         {
             case SelectMenu.CanSelectMenu:
-                if (this.GetModel<FoodMenuModel>().CanSelectFoodMenu.ContainsKey(_id))
+                if (this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Value.ContainsKey(_id))
                 {
-                    return this.GetModel<FoodMenuModel>().CanSelectFoodMenu[_id];
+                    return this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Value[_id];
                 }
                 else
                 {

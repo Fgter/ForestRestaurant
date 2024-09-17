@@ -19,15 +19,24 @@ public class UIWindowBase : MonoBehaviour,IController
         Yes,
         No
     }
-
+    /// <summary>
+    /// 每次启动UI的时候执行一次
+    /// </summary>
+    /// <param name="showData"></param>
     public virtual void OnShow(IUIData showData)
     {
 
     }
+    /// <summary>
+    /// 隐藏UI的时候执行一次
+    /// </summary>
     public virtual void OnHide()
     {
 
     }
+    /// <summary>
+    /// 销毁UI的时候执行一次
+    /// </summary>
     public virtual void OnDestroyClose()
     {
         

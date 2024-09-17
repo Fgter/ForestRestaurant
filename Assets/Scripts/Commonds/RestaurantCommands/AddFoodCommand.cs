@@ -31,9 +31,8 @@ public class AddFoodCommand : AbstractCommand
     void Succeed()//添加成功后的方法
     {
         _ls.FoodMenu.Add(_id, _foodItem);//添加至选择菜单中
-        _ls.CanSelectFoodMenu.Remove(_id);//移除可选择菜单中的值
+        _ls.CanSelectFoodMenu.Value.Remove(_id);//移除可选择菜单中的值
         _ls.ExpectedGoldSum += _foodItem.define.Price;//添加金币
-        this.SendEvent<UpdateFoodMenuUIEvent>();
     }
     void Fail()//添加失败后的方法(非类型错误的情况)
     {

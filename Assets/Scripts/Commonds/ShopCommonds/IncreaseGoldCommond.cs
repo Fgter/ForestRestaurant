@@ -1,14 +1,15 @@
 ﻿using Models;
 using QFramework;
-class IncreaseGoldCommond : AbstractCommand
+class IncreaseGoldCommond : AbstractCommand<int>
 {
     int count;
     public IncreaseGoldCommond(int count)
     {
         this.count = count;
     }
-    protected override void OnExecute()
+    protected override int OnExecute()
     {
         this.GetModel<PlayerModel>().Gold.Value += count;
+        return count;
     }
 }

@@ -1,8 +1,6 @@
-using System.Collections;
+using QFramework;
 using System.Collections.Generic;
 using UnityEngine;
-using Models;
-using QFramework;
 
 public class UIBag : UIWindowBase
 {
@@ -14,7 +12,9 @@ public class UIBag : UIWindowBase
     UIButtonGroup btnGroup;
 
     List<UIBagItem> bagItems = new List<UIBagItem>();
-
+    private void Start()
+    {
+    }
     public override void OnShow(IUIData showData)
     {
         btnGroup.ActiveInitialSelectedBtn();

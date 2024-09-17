@@ -28,10 +28,18 @@ public class UIFoodMenu : UIWindowBase
     List<UIFoodMenuItem> UIFoodItems = new();
     [SerializeField]
     List<UIFoodMenuItem> UICanSelectMenus = new();
+    FoodMenuModel _foodMenuModel;
+    void Start()
+    {
+        _foodMenuModel = this.GetModel<FoodMenuModel>();
+        _foodMenuModel.CanSelectFoodMenu.RegisterWithInitValue(v =>
+        {
+            ShowUpdate();
+        }).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
     public override void OnShow(IUIData showData)
     {
         ShowUpdate();
-        this.RegisterEvent<UpdateFoodMenuUIEvent>(v => { ShowUpdate(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
         Handoff.onClick.RemoveAllListeners();
         Back.onClick.RemoveAllListeners();
         Handoff.onClick.AddListener(() =>
@@ -56,7 +64,7 @@ public class UIFoodMenu : UIWindowBase
     {
         UpdateList(SelectMenu.FoodMenu);
         UpdateList(SelectMenu.CanSelectMenu);
-        Gold.text = $"预计收益：{this.GetModel<FoodMenuModel>().ExpectedGoldSum}";
+        Gold.text = $"预计收益：{this.SendQuery(new GetExpectedGold())}";
     }
     void CreateFoodItem(FoodItem foodItem,SelectMenu selectMenu)//仅用于添加没有的UI
     {
