@@ -7,6 +7,7 @@ using Define;
 using SaveData;
 using Newtonsoft.Json;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Test : ViewController,IController
 {
@@ -36,22 +37,22 @@ public class Test : ViewController,IController
         //UIManager.instance.Show<PopUIPlantInfo>(new PopUIPlantInfoData(GetComponent<Soil>().plant));
         //this.SendCommand<AddItemCommond>(new AddItemCommond(1, 10));
         //this.SendCommand<AddItemCommond>(new AddItemCommond(10001, 10));
-       
+        SceneLoader.instance.LoadSceneAsync("³óÍÃ×ÓµÄ²âÊÔ");
     }
 
 
     [ContextMenu("Test3")]
     private void Test3()
     {
-        this.GetComponent<AnimationPlayer>().SetAnimation("Run2");
+        SceneLoader.instance.LoadSceneAsync("Test");
     }
     [ContextMenu("Test4")]
     private void Test4()
     {
-        TestSaveData data = this.GetUtility<Storage>().Load<TestSaveData>();
-        Debug.Log(data);
+       
     }
 
+    
     private void Start()
     {
     }

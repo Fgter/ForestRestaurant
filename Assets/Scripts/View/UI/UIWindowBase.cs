@@ -42,6 +42,10 @@ public class UIWindowBase : MonoBehaviour,IController
         
     }
 
+    private void OnDestroy()
+    {
+        OnDestroyClose();
+    }
     void Close(Result result,bool destroy=false)
     {
         OnCloseHanlder?.Invoke(this, result);

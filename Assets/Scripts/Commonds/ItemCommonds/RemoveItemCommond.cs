@@ -21,6 +21,7 @@ public class RemoveItemCommond : AbstractCommand<bool>
             if (item.count >= count)
             {
                 item.count -= count;
+                this.SendEvent(new ItemCountChangeEvent());
                 return true;
             }
             return false;
@@ -30,5 +31,6 @@ public class RemoveItemCommond : AbstractCommand<bool>
             Debug.LogError("id:" + id + " not in ItemModel");
             return false;
         }
+        
     }
 }

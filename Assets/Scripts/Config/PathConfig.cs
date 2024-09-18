@@ -10,5 +10,5 @@ public class PathConfig
     public const string UIPath="Prefabs/UI/";
     public const string AnimationPath = "Animations/";
     public const string SpritePath = "Sprites/";
-    public const string PrefabPath = "Prefabs/";
+    public const string PrefabPath = "Prefabs/SystemGameObjects";
 }

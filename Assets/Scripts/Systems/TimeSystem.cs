@@ -7,13 +7,12 @@ using SaveData;
 
 public class TimeSystem : AbstractSystem
 {
-    static Action _FiexdUpdateAction;
     static Action _SecondAction;
+    static Action<DateTime> _ClockAction;
     static float _secondTimer;
     DateTime _lastExitTime;
     protected override void OnInit()
     {
-        CommonMono.AddFixedUpdateAction(_FiexdUpdateAction);
         CommonMono.AddFixedUpdateAction(() =>
         {
             _secondTimer += Time.fixedDeltaTime;
@@ -23,14 +22,21 @@ public class TimeSystem : AbstractSystem
                 _secondTimer = 0;
             }
         });
+
+        _SecondAction += () =>
+          {
+              if (JudgeExactHourOrHalfHour(DateTime.Now))
+                  _ClockAction?.Invoke(DateTime.Now);
+          };
+
         CommonMono.AddQuitAction(OnQuit);
         Load();
     }
 
-    public static void AddFixedUpdateAction(Action fun) => _FiexdUpdateAction += fun;
-    public static void RemoveFixedUpdateAction(Action fun) => _FiexdUpdateAction -= fun;
-    public static void AddSecondUpdateAction(Action fun) => _SecondAction += fun;
-    public static void RemoveSecondUpdateAction(Action fun) => _SecondAction -= fun;
+    public static void RegisterSecondUpdateAction(Action fun) => _SecondAction += fun;
+    public static void UnRegisterSecondUpdateAction(Action fun) => _SecondAction -= fun;
+    public static void RegisterClockUpdateAction(Action<DateTime> fun) => _ClockAction += fun;
+    public static void UnRegisterClockUpdateAction(Action<DateTime> fun) => _ClockAction -= fun;
 
     public float GetOfflinePeriod()//获取下线时间的长度(day)
     {
@@ -40,13 +46,27 @@ public class TimeSystem : AbstractSystem
             return 0;
     }
 
-    public bool JudgeIsNextDayClock(float clock)
+    public bool JudgeExitTimeOneDayApartClock(float clock)
     {
         DateTime currentTime = DateTime.Now;
         DateTime nextDayTime = _lastExitTime.AddDays(1).Date.AddHours(clock);
         if (currentTime > nextDayTime)
             return true;
         return false;
+    }
+
+    public bool JudgeTimeOneDayApartClock(float clock,DateTime lastTime)
+    {
+        DateTime currentTime = DateTime.Now;
+        DateTime nextDayTime = lastTime.AddDays(1).Date.AddHours(clock);
+        if (currentTime > nextDayTime)
+            return true;
+        return false;
+    }
+
+    bool JudgeExactHourOrHalfHour(DateTime time)
+    {
+        return (time.Minute == 0 || time.Minute == 30) && time.Second == 0;
     }
 
     void OnQuit()

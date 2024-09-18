@@ -9,7 +9,7 @@ public class PlantingSystem : AbstractSystem
     protected override void OnInit()
     {
         _model = this.GetModel<PlantModel>();
-        TimeSystem.AddSecondUpdateAction(Grow);
+        TimeSystem.RegisterSecondUpdateAction(Grow);
         CommonMono.AddQuitAction(Save);
         InitSoil();
         Load();

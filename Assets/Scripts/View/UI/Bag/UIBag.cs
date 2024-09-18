@@ -1,5 +1,7 @@
 using QFramework;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class UIBag : UIWindowBase
@@ -12,33 +14,40 @@ public class UIBag : UIWindowBase
     UIButtonGroup btnGroup;
 
     List<UIBagItem> bagItems = new List<UIBagItem>();
+    Type currentItemType;
     private void Start()
     {
+        this.RegisterEvent<ItemCountChangeEvent>(v => RefreshCurrentPage());
     }
+
     public override void OnShow(IUIData showData)
     {
         btnGroup.ActiveInitialSelectedBtn();
-        Refresh<HarvestItem>();
+        RefreshHarvest();
     }
 
     public void RefreshHarvest()
     {
         Refresh<HarvestItem>();
+        currentItemType = typeof(HarvestItem);
     }
 
     public void RefreshSeed()
     {
         Refresh<SeedItem>();
+        currentItemType = typeof(SeedItem);
     }
 
     public void RefreshFood()
     {
         Refresh<FoodItem>();
+        currentItemType = typeof(FoodItem);
     }
 
     public void RefreshSpecialty()
     {
         Refresh<SpecialtyItem>();
+        currentItemType = typeof(SpecialtyItem);
     }
 
     void Refresh<T>() where T : Item
@@ -71,6 +80,13 @@ public class UIBag : UIWindowBase
                 CreateBagItem(items[temp], items[temp].count);
             }
         }
+    }
+
+    void RefreshCurrentPage()
+    {
+        MethodInfo method = this.GetType().GetMethod("Refresh",BindingFlags.Instance | BindingFlags.NonPublic).
+                            MakeGenericMethod(currentItemType);
+        method.Invoke(this, null);
     }
 
     void CreateBagItem(Item item, int count)

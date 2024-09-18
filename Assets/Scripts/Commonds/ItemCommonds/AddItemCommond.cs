@@ -28,6 +28,7 @@ public class AddItemCommond : AbstractCommand
             MethodInfo method = this.GetType().GetMethod("AddToClassifyItems").MakeGenericMethod(newItem.Type);
             method.Invoke(this,new object[] { model,newItem});
         }
+        this.SendEvent(new ItemCountChangeEvent());
     }
 
     public void AddToClassifyItems<T>(ItemModel model,T newItem)

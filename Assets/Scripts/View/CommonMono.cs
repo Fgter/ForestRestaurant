@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using QFramework;
 
-public class CommonMono : MonoBehaviour,IController
+public class CommonMono : MonoSingleton<CommonMono>, IController
 {
     static Action m_UpdateAction;
     static Action m_FixedUpdateAction;
@@ -17,12 +17,7 @@ public class CommonMono : MonoBehaviour,IController
     public static void AddQuitAction(Action fun) => m_QuitAction += fun;
     public static void RemoveQuitAction(Action fun) => m_QuitAction -= fun;
 
-    private void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    private void Awake()
+    protected override void OnAwake()
     {
         this.GetArchitecture();
     }

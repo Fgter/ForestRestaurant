@@ -52,11 +52,11 @@ public class PopUIPlantInfo : UIWindowBase
     private void Start()
     {
         m_btnHarvest.onClick.AddListener(Harvest);
-        TimeSystem.AddSecondUpdateAction(RefreshUI);
+        TimeSystem.RegisterSecondUpdateAction(RefreshUI);
     }
     public override void OnDestroyClose()
     {
-        TimeSystem.RemoveSecondUpdateAction(RefreshUI);
+        TimeSystem.UnRegisterSecondUpdateAction(RefreshUI);
     }
 
     void Harvest()
