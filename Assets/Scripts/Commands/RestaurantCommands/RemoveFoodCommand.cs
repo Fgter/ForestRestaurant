@@ -31,13 +31,14 @@ public class RemoveFoodCommand : AbstractCommand
     }
     void Succeed()//删除成功后的方法
     {
-        _ls.CanSelectFoodMenu.Value.Add(_id, _foodItem);//移除可选择菜单中的值
+        _ls.CanSelectFoodMenu.Add(_id, _foodItem);//移除可选择菜单中的值
         _ls.FoodMenu.Remove(_id);//添加至选择菜单中
         _ls.ExpectedGoldSum -= _foodItem.define.Price;//添加金币
+        this.SendEvent<UpdateFoodMenuUIEvent>();
     }
     void Fail()//删除失败后的方法(非类型错误的情况)
     {
-        //消息提示显示啥的
+        UIManager.instance.ShowMessageTip("[错误] 不存在该物体导致删除错误");
     }
 
 }

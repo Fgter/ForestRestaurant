@@ -24,7 +24,7 @@ public class GetFoodMenuQuery : AbstractQuery<List<FoodItem>>
         switch (_selectMenu)
         {
             case SelectMenu.CanSelectMenu:
-                foreach (var i in this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Value.Values)
+                foreach (var i in this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Values)
                 {
                     foodItems.Add(i);
                 }

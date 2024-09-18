@@ -3,6 +3,7 @@ using QFramework;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,10 +33,10 @@ public class UIFoodMenu : UIWindowBase
     void Start()
     {
         _foodMenuModel = this.GetModel<FoodMenuModel>();
-        _foodMenuModel.CanSelectFoodMenu.RegisterWithInitValue(v =>
+        this.RegisterEvent<UpdateFoodMenuUIEvent>(v =>
         {
             ShowUpdate();
-        }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        });
     }
     public override void OnShow(IUIData showData)
     {

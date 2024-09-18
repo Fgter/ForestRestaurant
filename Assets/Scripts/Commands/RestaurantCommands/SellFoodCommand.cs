@@ -46,7 +46,7 @@ public class SellFoodCommand : AbstractCommand
         }
         if (istf)
         {
-            Fail("缺少必要的材料",true);
+            Fail("缺少必要的材料");
             return;
         }
         //成功
@@ -54,16 +54,9 @@ public class SellFoodCommand : AbstractCommand
 
         return;
     }
-    void Fail(string massage,bool MaterialsAreMissing = false)//临时:无
+    void Fail(string massage)//临时:无
     {
-        if (MaterialsAreMissing)//缺少材料的方法
-        {
-
-        }
-        else//不缺少的方法
-        {
-
-        }
+        UIManager.instance.ShowMessageTip(massage).SetType(MessageType.Error);
     }
     void Run(int id,FoodItem foodItem,int index)
     {

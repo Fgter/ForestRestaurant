@@ -1,35 +1,34 @@
 ﻿using QFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class RestaurantSystem : AbstractSystem
 {
-    int _jg = 20;//间隔时间触发随机出售(s)
+    int _jg = 5;//间隔时间触发随机出售(s)
     float _thisTime = 0;//当前时间(s)
-    float _trigger = 1;//每次触发时的概率
+    float _trigger = 0.6f;//每次触发时的概率
     System.Random random = new System.Random();
+    static Action SoldAction;
     protected override void OnInit()
     {
         CommonMono.AddFixedUpdateAction(() =>
         {
             _thisTime += Time.fixedDeltaTime;
-            if(_thisTime >= _jg)
+            if (_thisTime >= _jg)
             {
-                _thisTime = 0;
+                _thisTime -= _jg;
                 if (RandomTrigger(_trigger))
                 {
-                    Sold();
+                    SoldAction?.Invoke();
                 }
             }
         });
-        //上线时候持续执行
-        //下线的时候(求差:取多余间隔)
-        //再次上限的时候(求差:取多余间隔)
+        CommonMono.AddQuitAction(Save);
+        Load();
     }
+    public static void AddSoldAction(Action action) => SoldAction+=action;
+    public static void RemoveSoldAction(Action action) =>SoldAction-=action;
+    public static void RemoveAllSoldAction() => SoldAction = null;
     bool RandomTrigger(float probability)//触发概率(0-1)
     {
         if (probability <= 0)
@@ -41,7 +40,7 @@ public class RestaurantSystem : AbstractSystem
             return true;
         }
         int ls = random.Next(0,100);
-        if (ls<=(int)probability*100)
+        if (ls<=(int)(probability*100))
         {
             return true;
         }
@@ -50,9 +49,13 @@ public class RestaurantSystem : AbstractSystem
             return false;
         }
     }
-    void Sold()
+    void Save()
     {
-
+        Debug.Log("保存下线后的数据");
+    }
+    void Load()
+    {
+        Debug.Log("加载上次下线的数据");
     }
 }
 
