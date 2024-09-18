@@ -13,7 +13,7 @@ public class CollectRestaurantGoldCommand : AbstractCommand
     {
         _foodMenuModel = this.GetModel<FoodMenuModel>();
         _foodMenuModel.GoldSum = 0;
-        test = this.SendCommand(new IncreaseGoldCommond(_foodMenuModel.GoldSum));
+        test = this.SendCommand(new IncreaseGoldCommand(_foodMenuModel.GoldSum));
         Debug.LogFormat("当前金币数量:{0}",test);
     }
 }

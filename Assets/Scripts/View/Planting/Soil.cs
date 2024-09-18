@@ -24,7 +24,7 @@ public class Soil : MonoBehaviour, IPointerClickHandler, IController
     {
         if (_data.havePlant)
             return false;
-        if (this.SendCommand(new GrowPlantCommond(id, this, m_plantPrefab)) != null)
+        if (this.SendCommand(new GrowPlantCommand(id, this, m_plantPrefab)) != null)
             return true;
         else
             return false;

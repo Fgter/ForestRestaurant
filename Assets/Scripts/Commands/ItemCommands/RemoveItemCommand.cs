@@ -4,11 +4,11 @@ using UnityEngine;
 using QFramework;
 using Models;
 
-public class RemoveItemCommond : AbstractCommand<bool>
+public class RemoveItemCommand : AbstractCommand<bool>
 {
     int id;
     int count;
-    public RemoveItemCommond(int id,int count)
+    public RemoveItemCommand(int id,int count)
     {
         this.id = id;
         this.count = count;

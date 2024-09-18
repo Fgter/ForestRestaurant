@@ -3,14 +3,14 @@ using UnityEngine;
 using QFramework;
 using Define;
 
-public class GrowPlantCommond : AbstractCommand<Plant>
+public class GrowPlantCommand : AbstractCommand<Plant>
 {
     int id;
     PlantDefine plantDefine;
     Soil soil;
     GameObject prefab;
     Transform ts;
-    public GrowPlantCommond(int id,Soil soil,GameObject prefab)
+    public GrowPlantCommand(int id,Soil soil,GameObject prefab)
     {
         this.id = id;
         this.soil = soil;

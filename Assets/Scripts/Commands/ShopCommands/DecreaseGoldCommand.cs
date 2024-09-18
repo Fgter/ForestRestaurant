@@ -1,9 +1,9 @@
 ﻿using Models;
 using QFramework;
-class DecreaseGoldCommond : AbstractCommand<bool>
+class DecreaseGoldCommand : AbstractCommand<bool>
 {
     int count;
-    public DecreaseGoldCommond(int count)
+    public DecreaseGoldCommand(int count)
     {
         this.count = count;
     }

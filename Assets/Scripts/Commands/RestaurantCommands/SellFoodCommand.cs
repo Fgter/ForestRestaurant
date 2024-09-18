@@ -50,7 +50,7 @@ public class SellFoodCommand : AbstractCommand
             return;
         }
         //成功
-        this.SendCommand(new IncreaseGoldCommond(foodItem.define.Price));
+        this.SendCommand(new IncreaseGoldCommand(foodItem.define.Price));
 
         return;
     }

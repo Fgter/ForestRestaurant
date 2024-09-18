@@ -74,7 +74,7 @@ public class UIShop : UIWindowBase
     [ContextMenu("aaaa")]
     public void Show()
     {
-        this.SendCommand(new IncreaseGoldCommond(500));
+        this.SendCommand(new IncreaseGoldCommand(500));
         OnShow(new UIShopData(1));
     }
 
@@ -98,7 +98,7 @@ public class UIShop : UIWindowBase
     {
         if (currentSelectItem == null)
             return;
-        if(this.SendCommand(new BuyItemCommond(shopId, currentSelectItem.define.Id, _numberBtns.currentNumber)))
+        if(this.SendCommand(new BuyItemCommand(shopId, currentSelectItem.define.Id, _numberBtns.currentNumber)))
         {
             UIManager.instance.ShowTip(string.Format("»ñµÃ {0} x {1}",currentSelectItem.itemDefine.Name,_numberBtns.currentNumber));
             Refresh(_pages.currentPage.rectTransform);

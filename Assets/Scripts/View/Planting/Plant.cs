@@ -24,14 +24,14 @@ public class Plant : MonoBehaviour,IController,IPointerClickHandler
         if (entityData.TryHarvest())
         {
             PlantDefine define = entityData.define;
-            this.SendCommand(new AddItemCommond(define.HarvestId, Random.Range(define.HarvestCountMin, define.HarvestCountMax)));
+            this.SendCommand(new AddItemCommand(define.HarvestId, Random.Range(define.HarvestCountMin, define.HarvestCountMax)));
             if (entityData.canReGrow)
             {
                 entityData.ReGrow();
             }
             else
             {
-                this.SendCommand(new ClearSoilCommond(soil));
+                this.SendCommand(new ClearSoilCommand(soil));
                 Destroy(gameObject);
             }
         }

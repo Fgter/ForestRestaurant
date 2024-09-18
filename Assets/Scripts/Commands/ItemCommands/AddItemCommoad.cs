@@ -3,11 +3,11 @@ using QFramework;
 using Models;
 using System.Reflection;
 
-public class AddItemCommond : AbstractCommand
+public class AddItemCommand : AbstractCommand
 {
     int id;
     int count;
-    public AddItemCommond(int id, int count)
+    public AddItemCommand(int id, int count)
     {
         this.id = id;
         this.count = count;
@@ -22,7 +22,7 @@ public class AddItemCommond : AbstractCommand
         }
         else
         {
-            Item newItem = this.SendCommand(new CreateItemCommond(id));
+            Item newItem = this.SendCommand(new CreateItemCommand(id));
             newItem.count += count;
             model.Items.Add(id, newItem);
             MethodInfo method = this.GetType().GetMethod("AddToClassifyItems").MakeGenericMethod(newItem.Type);

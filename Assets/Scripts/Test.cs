@@ -22,8 +22,8 @@ public class Test : ViewController,IController
     {
         //this.SendQuery(new GetItemQuery<SeedItem>(3));
         //UIManager.instance.Show<UIBag>(null);
-        this.SendCommand<AddItemCommond>(new AddItemCommond(1, 10));
-        this.SendCommand<AddItemCommond>(new AddItemCommond(2, 10)); 
+        this.SendCommand<AddItemCommand>(new AddItemCommand(1, 10));
+        this.SendCommand<AddItemCommand>(new AddItemCommand(2, 10)); 
     }
 
     [ContextMenu("Test2")]

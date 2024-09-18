@@ -3,10 +3,10 @@ using UnityEngine;
 using Models;
 using Define;
 
-class CreateItemCommond : AbstractCommand<Item>
+class CreateItemCommand : AbstractCommand<Item>
 {
     int id;
-    public CreateItemCommond(int id)
+    public CreateItemCommand(int id)
     {
         this.id = id;
     }

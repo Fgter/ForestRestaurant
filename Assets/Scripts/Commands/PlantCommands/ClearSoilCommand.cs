@@ -1,10 +1,10 @@
 using Models;
 using QFramework;
 
-public class ClearSoilCommond : AbstractCommand
+public class ClearSoilCommand : AbstractCommand
 {
     SoilEntityData soil;
-    public ClearSoilCommond(SoilEntityData soil)
+    public ClearSoilCommand(SoilEntityData soil)
     {
         this.soil = soil;
     }

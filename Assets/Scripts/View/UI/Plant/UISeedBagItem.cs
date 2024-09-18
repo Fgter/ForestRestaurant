@@ -41,7 +41,7 @@ public class UISeedBagItem : MonoBehaviour,IController
     void OnClick()
     {
         if (owner.soil.GrowPlant(item.define.TargetPlant))
-            this.SendCommand(new RemoveItemCommond(item.define.Id, 1));
+            this.SendCommand(new RemoveItemCommand(item.define.Id, 1));
         owner.HideNo();
     }
 }
