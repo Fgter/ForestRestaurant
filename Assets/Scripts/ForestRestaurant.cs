@@ -15,7 +15,7 @@ public class ForestRestaurant : Architecture<ForestRestaurant>
         RegisterModel(new DefineModel());
         RegisterModel(new ItemModel());
         RegisterModel(new PlantModel());
-        RegisterModel(new FoodMenuModel());
+        RegisterModel(new RestaurantModel());
         RegisterModel(new PlayerModel());
         RegisterModel(new ShopModel());
         //System

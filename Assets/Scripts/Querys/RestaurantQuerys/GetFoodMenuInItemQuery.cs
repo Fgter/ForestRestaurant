@@ -18,9 +18,9 @@ public class GetFoodMenuInItemQuery : AbstractQuery<FoodItem>
         switch (_selectMenu)
         {
             case SelectMenu.CanSelectMenu:
-                if (this.GetModel<FoodMenuModel>().CanSelectFoodMenu.ContainsKey(_id))
+                if (this.GetModel<RestaurantModel>().CanSelectFoodMenu.ContainsKey(_id))
                 {
-                    return this.GetModel<FoodMenuModel>().CanSelectFoodMenu[_id];
+                    return this.GetModel<RestaurantModel>().CanSelectFoodMenu[_id];
                 }
                 else
                 {
@@ -28,9 +28,9 @@ public class GetFoodMenuInItemQuery : AbstractQuery<FoodItem>
                     return null;
                 }
             case SelectMenu.FoodMenu:
-                if (this.GetModel<FoodMenuModel>().FoodMenu.ContainsKey(_id))
+                if (this.GetModel<RestaurantModel>().FoodMenu.ContainsKey(_id))
                 {
-                    return this.GetModel<FoodMenuModel>().FoodMenu[_id];
+                    return this.GetModel<RestaurantModel>().FoodMenu[_id];
                 }
                 else
                 {

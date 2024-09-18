@@ -1,7 +1,6 @@
 ﻿using Define;
-using QFramework;
-using UnityEngine;
 using Models;
+using QFramework;
 
 public class UnlockFoodCommand : AbstractCommand
 {
@@ -15,7 +14,7 @@ public class UnlockFoodCommand : AbstractCommand
         FoodItem _foodItem = new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(_id)));
         if(_foodItem != null)
         {
-            this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Add(_id, _foodItem);
+            this.GetModel<RestaurantModel>().CanSelectFoodMenu.Add(_id, _foodItem);
         }
         else
         {

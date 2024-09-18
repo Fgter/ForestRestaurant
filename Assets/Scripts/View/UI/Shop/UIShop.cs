@@ -1,9 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
-using QFramework;
-using TMPro;
-using System;
 using Define;
+using QFramework;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 struct UIShopData : IUIData
 {

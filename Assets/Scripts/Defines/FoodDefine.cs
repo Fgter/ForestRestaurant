@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Define
 {
@@ -16,6 +11,7 @@ namespace Define
         public List<int> Sum { get; set; } = new();//消耗食物的数量
         public int Price { get; set; }//出售的基础价格
         public string Description { get; set; }//描述
+        public List<string> Acclaim { get; set; } = new();//好评列表
         
     }
 }

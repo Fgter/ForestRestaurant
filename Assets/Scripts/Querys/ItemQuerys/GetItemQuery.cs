@@ -1,8 +1,7 @@
-﻿using QFramework;
-using Models;
-using UnityEngine;
+﻿using Models;
+using QFramework;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 
 class GetItemQuery<T> : AbstractQuery<T> where T : Item
 {

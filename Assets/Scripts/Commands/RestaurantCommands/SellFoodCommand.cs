@@ -1,8 +1,6 @@
 ﻿using Models;
 using QFramework;
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 /// <summary>
 /// 出售食物的指令返回值为一个缺失的食物以及数量
@@ -28,12 +26,11 @@ public class SellFoodCommand : AbstractCommand
         _itemModel = this.GetModel<ItemModel>();
         if(foodItem == null)
         {
-            Fail("该食物不在餐厅菜单中");
+            //Fail("该食物不在餐厅菜单中");
             return;//查询不到对应的食物
         }
         foreach(int i in foodItem.define.Supplies)
-        {
-            index++;
+        { 
             if (_itemModel.Items.ContainsKey(i))
             {
                 Run(i,foodItem,index);
@@ -43,15 +40,15 @@ public class SellFoodCommand : AbstractCommand
                 istf = true;
                 NoRun(i,foodItem,index);
             }
+            index++;
         }
         if (istf)
         {
-            Fail("缺少必要的材料");
+            //Fail("缺少必要的材料");
             return;
         }
         //成功
         this.SendCommand(new IncreaseGoldCommand(foodItem.define.Price));
-
         return;
     }
     void Fail(string massage)//临时:无
@@ -66,12 +63,12 @@ public class SellFoodCommand : AbstractCommand
         }
         else//记录缺少的材料
         {
-            AddList(_itemModel.Items[id], foodItem.define.Sum[index] - _itemModel.Items[id].count);
+            AddList(this.SendCommand(new CreateItemCommand(id)), foodItem.define.Sum[index] - _itemModel.Items[id].count);
         }
     }
     void NoRun(int id, FoodItem foodItem,int index)
     {
-        AddList(_itemModel.Items[id], foodItem.define.Sum[index]);
+        AddList(this.SendCommand(new CreateItemCommand(id)), foodItem.define.Sum[index]);
     }
     void AddList(Item item,int sum)
     {

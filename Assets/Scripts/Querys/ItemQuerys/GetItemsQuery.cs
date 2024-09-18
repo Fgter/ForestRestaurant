@@ -1,10 +1,8 @@
-﻿using QFramework;
-using System;
+﻿using Models;
+using QFramework;
 using System.Collections.Generic;
-using Models;
-using UnityEngine;
 
-    class GetItemsQuery<T>:AbstractQuery<List<T>> where T:Item
+class GetItemsQuery<T>:AbstractQuery<List<T>> where T:Item
     {
 
     protected override List<T> OnDo()

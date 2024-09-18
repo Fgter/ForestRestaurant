@@ -1,5 +1,4 @@
-﻿
-namespace Define
+﻿namespace Define
 {
     public class ShopItemDefine : IDefine
     {

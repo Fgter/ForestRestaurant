@@ -1,8 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class SceneLoader : MonoSingleton<SceneLoader>
 {
     [SerializeField]

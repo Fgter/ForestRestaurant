@@ -68,13 +68,18 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
     void CreateSupplies(int Id,int sum)
     {
         UIFoodMenuItemItem go = Instantiate(UIFoodSuppliesPrefab, SuppliesList.transform).GetComponent<UIFoodMenuItemItem>();
-        //Item a = this.SendQuery(new GetItemQuery<Item>(Id));//这里暂时这样写
         SetSupplies(go, Id,sum);
         SuppliesListPrefabs.Add(go);
     }
     void SetSupplies(UIFoodMenuItemItem go, int id,int sum)
     {
-        go.Set($"X{sum}", ResLoader.Load<Sprite>(PathConfig.SpritePath + "Pineapple"));
+        string name = this.SendCommand(new CreateItemCommand(id)).define.Icon;
+        if (name.Equals(""))
+        {
+            go.Set($"X{sum}", ResLoader.Load<Sprite>(PathConfig.SpritePath + "Feces"));
+            return;
+        }
+        go.Set($"X{sum}", ResLoader.Load<Sprite>(PathConfig.SpritePath + name));
 
     }
 }

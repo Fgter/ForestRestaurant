@@ -24,13 +24,13 @@ public class GetFoodMenuQuery : AbstractQuery<List<FoodItem>>
         switch (_selectMenu)
         {
             case SelectMenu.CanSelectMenu:
-                foreach (var i in this.GetModel<FoodMenuModel>().CanSelectFoodMenu.Values)
+                foreach (var i in this.GetModel<RestaurantModel>().CanSelectFoodMenu.Values)
                 {
                     foodItems.Add(i);
                 }
                 return foodItems;
             case SelectMenu.FoodMenu:
-                foreach (var i in this.GetModel<FoodMenuModel>().FoodMenu.Values)
+                foreach (var i in this.GetModel<RestaurantModel>().FoodMenu.Values)
                 {
                     foodItems.Add(i);
                 }

@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using Define;
+using System;
+using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Define;
-using System.Text;
-using System;
-using TMPro;
 
 public class PopUIPlantInfoData : IUIData
 {

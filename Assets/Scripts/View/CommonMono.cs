@@ -1,6 +1,5 @@
-using UnityEngine;
-using System;
 using QFramework;
+using System;
 
 public class CommonMono : MonoSingleton<CommonMono>, IController
 {

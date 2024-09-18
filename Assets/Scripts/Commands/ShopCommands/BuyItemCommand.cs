@@ -1,6 +1,5 @@
-﻿using QFramework;
-using System.Collections.Generic;
-using Models;
+﻿using Models;
+using QFramework;
 
 class BuyItemCommand : AbstractCommand<bool>
 {

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using QFramework;
-using UnityEngine.Events;
 using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class UIWindowBase : MonoBehaviour,IController
 {

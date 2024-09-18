@@ -3,7 +3,6 @@ using QFramework;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,20 +28,14 @@ public class UIFoodMenu : UIWindowBase
     List<UIFoodMenuItem> UIFoodItems = new();
     [SerializeField]
     List<UIFoodMenuItem> UICanSelectMenus = new();
-    FoodMenuModel _foodMenuModel;
+    RestaurantModel _foodMenuModel;
     void Start()
     {
-        _foodMenuModel = this.GetModel<FoodMenuModel>();
+        _foodMenuModel = this.GetModel<RestaurantModel>();
         this.RegisterEvent<UpdateFoodMenuUIEvent>(v =>
         {
             ShowUpdate();
         });
-    }
-    public override void OnShow(IUIData showData)
-    {
-        ShowUpdate();
-        Handoff.onClick.RemoveAllListeners();
-        Back.onClick.RemoveAllListeners();
         Handoff.onClick.AddListener(() =>
         {
             if (CanSelectMenuRoot.activeInHierarchy)
@@ -61,11 +54,15 @@ public class UIFoodMenu : UIWindowBase
             UIManager.instance.Close(typeof(UIFoodMenu));
         });
     }
+    public override void OnShow(IUIData showData)
+    {
+        ShowUpdate();
+    }
     void ShowUpdate()
     {
         UpdateList(SelectMenu.FoodMenu);
         UpdateList(SelectMenu.CanSelectMenu);
-        Gold.text = $"预计收益：{this.SendQuery(new GetExpectedGold())}";
+        Gold.text = $"预计收益：{this.SendQuery(new GetExpectedGoldQuery())}";
     }
     void CreateFoodItem(FoodItem foodItem,SelectMenu selectMenu)//仅用于添加没有的UI
     {

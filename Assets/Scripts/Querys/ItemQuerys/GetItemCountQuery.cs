@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Models;
 using QFramework;
-using Models;
+using UnityEngine;
 
 class GetItemCountQuery : AbstractQuery<int>
 {

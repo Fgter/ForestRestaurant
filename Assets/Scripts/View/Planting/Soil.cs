@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using QFramework;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using QFramework;
-using Define;
 
 public class Soil : MonoBehaviour, IPointerClickHandler, IController
 {

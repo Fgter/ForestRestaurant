@@ -8,7 +8,7 @@ using UnityEngine;
 public class RemoveFoodCommand : AbstractCommand
 {
     FoodItem _foodItem;
-    FoodMenuModel _ls;
+    RestaurantModel _ls;
     int _id;
     public RemoveFoodCommand(int Id)
     {
@@ -18,7 +18,7 @@ public class RemoveFoodCommand : AbstractCommand
     {
         Debug.Log("[RemoveFoodCommand] 删除食物指令触发");
         _foodItem = this.SendQuery(new GetFoodMenuInItemQuery(_id, SelectMenu.FoodMenu));
-        _ls = this.GetModel<FoodMenuModel>();
+        _ls = this.GetModel<RestaurantModel>();
         if (_ls != null) //类型与重复存在判断
         {
             Succeed();

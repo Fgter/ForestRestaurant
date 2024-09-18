@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Define
+﻿namespace Define
 {
     public class SoilDefine:IDefine
     {

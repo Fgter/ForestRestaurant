@@ -1,7 +1,6 @@
-using System.Collections;
+using QFramework;
 using System.Collections.Generic;
 using UnityEngine;
-using QFramework;
 
 
 class UISeedBagData:IUIData

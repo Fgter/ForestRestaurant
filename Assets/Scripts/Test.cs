@@ -37,7 +37,7 @@ public class Test : ViewController,IController
         //UIManager.instance.Show<PopUIPlantInfo>(new PopUIPlantInfoData(GetComponent<Soil>().plant));
         //this.SendCommand<AddItemCommond>(new AddItemCommond(1, 10));
         //this.SendCommand<AddItemCommond>(new AddItemCommond(10001, 10));
-        SceneLoader.instance.LoadSceneAsync("丑兔子的测试");
+        //SceneLoader.instance.LoadSceneAsync("丑兔子的测试");
     }
 
 

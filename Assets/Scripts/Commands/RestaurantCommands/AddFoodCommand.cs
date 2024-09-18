@@ -7,7 +7,7 @@ using UnityEngine;
 public class AddFoodCommand : AbstractCommand
 {
     FoodItem _foodItem;
-    FoodMenuModel _ls;
+    RestaurantModel _ls;
     int _id;
     public AddFoodCommand(int Id)
     {
@@ -17,7 +17,7 @@ public class AddFoodCommand : AbstractCommand
     {
         Debug.Log("[AddFoodCommand] 添加食物指令触发");
         _foodItem = this.SendQuery(new GetFoodMenuInItemQuery(_id,SelectMenu.CanSelectMenu));
-        _ls = this.GetModel<FoodMenuModel>();
+        _ls = this.GetModel<RestaurantModel>();
         if (_ls.FoodMenu.Count <= _ls.SelectMax && _foodItem !=null) //类型与重复存在判断
         {
             Succeed();

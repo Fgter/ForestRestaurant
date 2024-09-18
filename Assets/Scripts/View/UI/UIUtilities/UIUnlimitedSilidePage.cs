@@ -1,9 +1,8 @@
-using System.Collections;
+using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
-using System;
 
 public class UIUnlimitedSilidePage : MonoBehaviour
 {

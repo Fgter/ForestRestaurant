@@ -1,9 +1,8 @@
-using QFramework;
-using Models;
-using UnityEngine;
 using Define;
+using Models;
+using QFramework;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 
 public class GetDefineQuery<T> : AbstractQuery<T> where T:IDefine
 {
