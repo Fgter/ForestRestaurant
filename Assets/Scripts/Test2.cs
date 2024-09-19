@@ -8,11 +8,26 @@ public class Test2 : MonoBehaviour,IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        //UIManager.instance.Show<UIFoodMenu>(null);选择菜单
-        //UIManager.instance.Show<UIMessageBoards>(null);//留言板
-        UIManager.instance.Show<UICashRegister>(null);//收银台
+        
+       
+        
     }
 
+    [ContextMenu("T1")]
+    public void T1()
+    {
+        UIManager.instance.Show<UIFoodMenu>(null); //选择菜单
+    }
+    [ContextMenu("T2")]
+    public void T2()
+    {
+        UIManager.instance.Show<UIMessageBoards>(null);//留言板
+    }
+    [ContextMenu("T3")]
+    public void T3()
+    {
+        UIManager.instance.Show<UICashRegister>(null);//收银台
+    }
     // Start is called before the first frame update
     void Start()
     {

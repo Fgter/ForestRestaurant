@@ -930,13 +930,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b6bb5409ae79e44a39c73738972a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: {fileID: 1887742153898680941}
-  m_season: {fileID: 1887742153057186343}
-  m_stageName: {fileID: 1887742154849856336}
-  m_needtime: {fileID: 1887742153535668225}
-  m_progressText: {fileID: 1887742153691270028}
-  m_proress: {fileID: 1887742154642958345}
-  m_btnHarvest: {fileID: 5761694413510206844}
+  _name: {fileID: 1887742153898680941}
+  _season: {fileID: 1887742153057186343}
+  _stageName: {fileID: 1887742154849856336}
+  _needtime: {fileID: 1887742153535668225}
+  _progressText: {fileID: 1887742153691270028}
+  _proress: {fileID: 1887742154642958345}
+  _btnHarvest: {fileID: 5761694413510206844}
 --- !u!1 &1887742154541130109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1126,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 76, y: 0.89992523}
+  m_AnchoredPosition: {x: 76.00006, y: 0.89992523}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1887742154849856337

@@ -82,6 +82,8 @@ public class RestaurantSystem : AbstractSystem
     {
         RestaurantSaveData restaurantSaveData = new();
         restaurantSaveData = this.GetUtility<Storage>().Load<RestaurantSaveData>();
+        if (restaurantSaveData == default)
+            return;
         _model.Acclaims = restaurantSaveData.Acclaims;
         _model.CanSelectFoodMenu = restaurantSaveData.CanSelectFoodMenu;
         _model.ExpectedGoldSum = restaurantSaveData.ExpectedGoldSum;

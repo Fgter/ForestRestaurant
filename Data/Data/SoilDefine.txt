@@ -14,7 +14,7 @@
       0,
       2
     ],
-    "UnlockStart": true,
+    "UnlockStart": false,
     "Price": 500
   }
 }

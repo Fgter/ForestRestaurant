@@ -49,7 +49,7 @@ public class Test : ViewController,IController
     [ContextMenu("Test4")]
     private void Test4()
     {
-       
+        this.SendCommand(new IncreaseGoldCommand(500));
     }
 
     
