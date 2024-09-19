@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RestaurantSystem : AbstractSystem
 {
-    int _jg = 30;//间隔时间触发随机出售(s)<-可能需要放到配置表中
+    int _jg = 300;//间隔时间触发随机出售(s)<-可能需要放到配置表中
     float _thisTime = 0;//已经过去的时间
     float _trigger = 0.6f;//每次触发时的概率
     int _ranindex;//随机数随机出的值

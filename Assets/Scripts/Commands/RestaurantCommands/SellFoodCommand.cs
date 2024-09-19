@@ -49,6 +49,7 @@ public class SellFoodCommand : AbstractCommand
         }
         //成功
         this.SendCommand(new IncreaseGoldCommand(foodItem.define.Price));
+        this.SendEvent<ItemCountChangeEvent>();
         return;
     }
     void Fail(string massage)//临时:无

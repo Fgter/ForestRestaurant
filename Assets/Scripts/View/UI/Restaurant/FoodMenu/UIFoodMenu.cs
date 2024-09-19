@@ -28,10 +28,8 @@ public class UIFoodMenu : UIWindowBase
     List<UIFoodMenuItem> UIFoodItems = new();
     [SerializeField]
     List<UIFoodMenuItem> UICanSelectMenus = new();
-    RestaurantModel _foodMenuModel;
     void Start()
     {
-        _foodMenuModel = this.GetModel<RestaurantModel>();
         this.RegisterEvent<UpdateFoodMenuUIEvent>(v =>
         {
             ShowUpdate();

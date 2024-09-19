@@ -31,7 +31,7 @@ public class AddGuestbookCommand : AbstractCommand
         _acclaims.Clear();
         _acclaims = this.SendQuery(new GetFoodAcclaimQuery(_id));
         _model.Acclaims.Add(_id,_acclaims[_random.Next(_acclaims.Count)]);
-
+        this.SendEvent<UpdateMessageBoardsUIEvent>();
         _model.GoldSum += _random.Next(0,10);//小费
     }
 }

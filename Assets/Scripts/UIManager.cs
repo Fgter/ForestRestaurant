@@ -32,7 +32,10 @@ public class UIManager : Singleton<UIManager>
         UIResources[typeof(PopUIPlantInfo)] = new UIElement { AssetName = PathConfig.UIPath + "Plant/PopUIPlantInfo" };
         UIResources[typeof(UISeedBag)] = new UIElement { AssetName = PathConfig.UIPath + "Plant/UISeedBag" };
         UIResources[typeof(UIBag)] = new UIElement { AssetName = PathConfig.UIPath + "Bag/UIBag" };
-        UIResources[typeof(UIFoodMenu)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/UIFoodMenuSet" };
+        UIResources[typeof(UIFoodMenu)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/FoodMenu/UIFoodMenuSet" };
+        UIResources[typeof(UIMessageBoards)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/MessageBoards/UIMessageBoards" };
+        UIResources[typeof(UIShowMessage)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/MessageBoards/UIShowMessage" };
+        UIResources[typeof(UICashRegister)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/MessageBoards/UICashRegister" };
         UIResources[typeof(UIMessageTip)] = new UIElement { AssetName = PathConfig.UIPath + "UIMessageTip" };
         UIResources[typeof(UIShop)] = new UIElement { AssetName = PathConfig.UIPath + "Shop/UIShop" };
         UIResources[typeof(UITip)] = new UIElement { AssetName = PathConfig.UIPath + "UITip" };
