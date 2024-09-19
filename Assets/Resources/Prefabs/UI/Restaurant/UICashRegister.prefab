@@ -453,6 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _back: {fileID: 889999129555724453}
   _GoldSum: {fileID: 889999129711354872}
+  _Cash: {fileID: 889999130466559851}
 --- !u!1 &889999129711354874
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +602,7 @@ GameObject:
   - component: {fileID: 889999130466559848}
   - component: {fileID: 889999130466559851}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Cash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
