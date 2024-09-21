@@ -24,7 +24,7 @@ public class GetFoodMenuInItemQuery : AbstractQuery<FoodItem>
                 }
                 else
                 {
-                    Debug.LogError("[GetFoodMenuInItemQuery] 你所输入的id可能未解锁?");
+                    Debug.LogWarning("[GetFoodMenuInItemQuery] 找不到在选择菜单中的物品");
                     return null;
                 }
             case SelectMenu.FoodMenu:
@@ -34,11 +34,11 @@ public class GetFoodMenuInItemQuery : AbstractQuery<FoodItem>
                 }
                 else
                 {
-                    Debug.LogError("[GetFoodMenuInItemQuery] 你所输入的id可能未解锁?");
+                    Debug.LogWarning("[GetFoodMenuInItemQuery] 找不到已选择菜单的物品");
                     return null;
                 }
             default:
-                Debug.LogError("[GetFoodMenuInItemQuery] 你所输入的id可能未解锁?");
+                Debug.LogError("[GetFoodMenuInItemQuery] 没有这个菜单选项");
                 return null;
         }
         

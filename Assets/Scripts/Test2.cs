@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class Test2 : MonoBehaviour,IPointerClickHandler
+public class Test2 : MonoBehaviour,IPointerClickHandler, IController
 {
-    
+    public IArchitecture GetArchitecture()
+    {
+        return ForestRestaurant.Interface;
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
         
@@ -27,6 +30,26 @@ public class Test2 : MonoBehaviour,IPointerClickHandler
     public void T3()
     {
         UIManager.instance.Show<UICashRegister>(null);//收银台
+    }
+    [ContextMenu("删档")]
+    public void Delect()
+    {
+        Storage.RemoveAllSaves();
+    }
+    [ContextMenu("解锁食物")]
+    public void AddFood()
+    {
+        this.SendCommand(new UnlockFoodCommand(2001));
+        this.SendCommand(new UnlockFoodCommand(2002));
+        this.SendCommand(new UnlockFoodCommand(2003));
+        this.SendCommand(new UnlockFoodCommand(2004));
+        this.SendCommand(new UnlockFoodCommand(2005));
+        this.SendCommand(new UnlockFoodCommand(2006));
+    }
+    [ContextMenu("添加一天的时间")]
+    public void AddOneDay()
+    {
+        RestaurantSystem.AddTiem(86400);
     }
     // Start is called before the first frame update
     void Start()

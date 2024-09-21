@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// ¡Ù—‘∞Â
+/// </summary>
 public class UIMessageBoards : UIWindowBase
 {
     [SerializeField]

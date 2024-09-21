@@ -1,6 +1,7 @@
 ﻿using Define;
 using Models;
 using QFramework;
+using UnityEngine;
 
 public class UnlockFoodCommand : AbstractCommand
 {
@@ -12,9 +13,15 @@ public class UnlockFoodCommand : AbstractCommand
     protected override void OnExecute()
     {
         FoodItem _foodItem = new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(_id)));
-        if(_foodItem != null)
+        if(this.SendQuery(new GetFoodMenuInItemQuery(_id, SelectMenu.FoodMenu))!=null || this.SendQuery(new GetFoodMenuInItemQuery(_id, SelectMenu.CanSelectMenu))!=null)
+        {
+            Debug.Log("[UnlockFoodCommand] 该物品已经解锁");
+            return;
+        }
+        if (_foodItem != null)
         {
             this.GetModel<RestaurantModel>().CanSelectFoodMenu.Add(_id, _foodItem);
+            this.SendEvent<UpdateFoodMenuUIEvent>();
         }
         else
         {

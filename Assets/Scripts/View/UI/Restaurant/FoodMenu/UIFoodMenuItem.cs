@@ -5,8 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-
 public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
 {
     [SerializeField]
@@ -34,10 +32,10 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
 
     public void SetFoodItem(FoodItem foodItem,Action action = null)
     {
-        icon.sprite = ResLoader.LoadSprite(foodItem.define.Icon);
-        description.text = foodItem.define.Description;
-        Name.text = foodItem.define.Name;
-        if(SuppliesListPrefabs.Count< foodItem.define.Supplies.Count)
+        icon.sprite = ResLoader.LoadSprite(foodItem.define.Icon);//加载当前食物的图片
+        description.text = foodItem.define.Description;//加载当前食物的描述
+        Name.text = foodItem.define.Name;//加载当前食物的名称
+        if (SuppliesListPrefabs.Count< foodItem.define.Supplies.Count)
         {
             for (int i = 0; i < foodItem.define.Supplies.Count; i++)
             {
@@ -80,7 +78,6 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
             return;
         }
         go.Set($"X{sum}", ResLoader.Load<Sprite>(PathConfig.SpritePath + name));
-
     }
 }
 

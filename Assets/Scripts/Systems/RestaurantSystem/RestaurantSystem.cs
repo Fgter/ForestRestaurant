@@ -1,13 +1,16 @@
-﻿using Models;
+﻿using Define;
+using Models;
 using QFramework;
 using SaveData;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RestaurantSystem : AbstractSystem
 {
     int _jg = 300;//间隔时间触发随机出售(s)<-可能需要放到配置表中
-    float _thisTime = 0;//已经过去的时间
+    static float _thisTime = 0;//已经过去的时间
     float _trigger = 0.6f;//每次触发时的概率
     int _ranindex;//随机数随机出的值
     System.Random _random = new System.Random();
@@ -41,10 +44,8 @@ public class RestaurantSystem : AbstractSystem
             //UIManager.instance.ShowMessageTip("请在餐厅选择出售的食材");
             return;
         }
-        Debug.Log("出售成功");
         _ranindex = _random.Next(0, _ids.Count);
         this.SendCommand(new SellFoodCommand(_ids[_ranindex]));
-        this.SendCommand(new AddGuestbookCommand(_ids[_ranindex]));
     }
 
     bool RandomTrigger(float probability)//触发概率(0-1)
@@ -71,10 +72,10 @@ public class RestaurantSystem : AbstractSystem
     {
         RestaurantSaveData restaurantSaveData = new();
         restaurantSaveData.Acclaims = _model.Acclaims;
-        restaurantSaveData.CanSelectFoodMenu = _model.CanSelectFoodMenu;
+        restaurantSaveData.CanSelectFoodMenu.AddRange (_model.CanSelectFoodMenu.Keys);
         restaurantSaveData.ExpectedGoldSum = _model.ExpectedGoldSum;
-        restaurantSaveData.FoodMenu = _model.FoodMenu;
-        restaurantSaveData.GoldSum = _model.GoldSum;
+        restaurantSaveData.FoodMenu.AddRange(_model.FoodMenu.Keys) ;
+        restaurantSaveData.GoldSum = _model.GoldSum.Value;
         restaurantSaveData.SelectMax = _model.SelectMax;
         this.GetUtility<Storage>().Save(restaurantSaveData);
     }
@@ -85,10 +86,16 @@ public class RestaurantSystem : AbstractSystem
         if (restaurantSaveData == default)
             return;
         _model.Acclaims = restaurantSaveData.Acclaims;
-        _model.CanSelectFoodMenu = restaurantSaveData.CanSelectFoodMenu;
+        foreach (var item in restaurantSaveData.CanSelectFoodMenu)
+        {
+            _model.CanSelectFoodMenu.Add(item, new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(item))));
+        }
         _model.ExpectedGoldSum = restaurantSaveData.ExpectedGoldSum;
-        _model.FoodMenu = restaurantSaveData.FoodMenu;
-        _model.GoldSum = restaurantSaveData.GoldSum;
+        foreach (var item in restaurantSaveData.FoodMenu)
+        {
+            _model.FoodMenu.Add(item, new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(item))));
+        }
+        _model.GoldSum.Value = restaurantSaveData.GoldSum;
         _model.SelectMax = restaurantSaveData.SelectMax;
         _thisTime = TimeConverter.DayToSecond(this.GetSystem<TimeSystem>().GetOfflinePeriod());
         if (TimeConverter.SecondToDay(_thisTime) >= 1)
@@ -103,6 +110,10 @@ public class RestaurantSystem : AbstractSystem
                 Sold();
             }
         }
+    }
+    public static void AddTiem(float time)
+    {
+        _thisTime += time;
     }
 }
 

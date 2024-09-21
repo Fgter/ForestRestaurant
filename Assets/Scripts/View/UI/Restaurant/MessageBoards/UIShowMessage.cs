@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+/// <summary>
+/// 显示留言板信息
+/// </summary>
 public class UIShowMessage : UIWindowBase
 {
     [SerializeField]

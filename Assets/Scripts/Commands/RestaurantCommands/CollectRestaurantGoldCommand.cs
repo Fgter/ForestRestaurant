@@ -11,9 +11,8 @@ public class CollectRestaurantGoldCommand : AbstractCommand
     protected override void OnExecute()
     {
         _foodMenuModel = this.GetModel<RestaurantModel>();
-        _foodMenuModel.GoldSum = 0;
-        test = this.SendCommand(new IncreaseGoldCommand(_foodMenuModel.GoldSum));
-        this.SendEvent<UpdateCashRegisterUIEvent>();
+        test = this.SendCommand(new IncreaseGoldCommand(_foodMenuModel.GoldSum.Value));
+        _foodMenuModel.GoldSum.Value = 0;
         Debug.LogFormat("当前金币数量:{0}",test);
     }
 }

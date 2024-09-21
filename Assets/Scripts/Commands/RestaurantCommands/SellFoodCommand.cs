@@ -1,6 +1,7 @@
 ﻿using Models;
 using QFramework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// 出售食物的指令返回值为一个缺失的食物以及数量
@@ -10,7 +11,9 @@ public class SellFoodCommand : AbstractCommand
     int _id;
     bool istf = false;//是否能出售
     ItemModel _itemModel;
-    static Dictionary<Item, int> _itemdic;//存储的是缺少的材料
+    RestaurantModel _restaurantModel;
+    static Dictionary<int, int> _itemdic;//存储的是缺少的材料
+    static Dictionary<int, int> _haveitemdic;//存储的是已经存在的材料
     public SellFoodCommand(int id) {
         _id = id;
     }
@@ -20,10 +23,16 @@ public class SellFoodCommand : AbstractCommand
         {
             _itemdic = new(); 
         }
+        if (_haveitemdic == null)
+        {
+            _haveitemdic = new();
+        }
         _itemdic.Clear();
+        _haveitemdic.Clear();
         FoodItem foodItem = this.SendQuery(new GetFoodMenuInItemQuery(_id, SelectMenu.FoodMenu));
         int index = 0;
         _itemModel = this.GetModel<ItemModel>();
+        _restaurantModel = this.GetModel<RestaurantModel>();
         if(foodItem == null)
         {
             //Fail("该食物不在餐厅菜单中");
@@ -44,11 +53,18 @@ public class SellFoodCommand : AbstractCommand
         }
         if (istf)
         {
+            Debug.Log("[SellFoodCommand] 缺少材料");
             //Fail("缺少必要的材料");
             return;
         }
         //成功
-        this.SendCommand(new IncreaseGoldCommand(foodItem.define.Price));
+        Debug.Log("[SellFoodCommand] 出售成功");
+        this.SendCommand(new AddGuestbookCommand(_id));
+        _restaurantModel.GoldSum.Value += foodItem.define.Price;
+        foreach (var i in _haveitemdic.Keys)
+        {
+            this.SendCommand(new RemoveItemCommand(i, _haveitemdic[i]));
+        }
         this.SendEvent<ItemCountChangeEvent>();
         return;
     }
@@ -61,19 +77,38 @@ public class SellFoodCommand : AbstractCommand
         if (_itemModel.Items[id].count >= foodItem.define.Sum[index])//条件成立
         {
             Debug.Log($"{_itemModel.Items[id]}该材料存在且数量足够");
+            AddHaveList(id, foodItem.define.Sum[index]);
         }
         else//记录缺少的材料
         {
-            AddList(this.SendCommand(new CreateItemCommand(id)), foodItem.define.Sum[index] - _itemModel.Items[id].count);
+            AddNothaveList(id, foodItem.define.Sum[index] - _itemModel.Items[id].count);
         }
     }
     void NoRun(int id, FoodItem foodItem,int index)
     {
-        AddList(this.SendCommand(new CreateItemCommand(id)), foodItem.define.Sum[index]);
+        AddNothaveList(id, foodItem.define.Sum[index]);
     }
-    void AddList(Item item,int sum)
+    void AddNothaveList(int id,int sum)
     {
-        _itemdic.Add(item,sum);
+        if(!_itemdic.ContainsKey(id))
+        {
+            _itemdic.Add(id, sum);
+        }
+        else
+        {
+            _itemdic[id] += sum;
+        }
+    }
+    void AddHaveList(int id , int sum)
+    {
+        if (!_haveitemdic.ContainsKey(id))
+        {
+            _haveitemdic.Add(id, sum);
+        }
+        else
+        {
+            _haveitemdic[id] += sum;
+        }
     }
 }
 
