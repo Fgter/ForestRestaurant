@@ -19,6 +19,7 @@ public class RemoveItemCommand : AbstractCommand<bool>
             if (item.count >= count)
             {
                 item.count -= count;
+                //这里判断一下等于0的时候清除字典中对应的映射关系
                 this.SendEvent(new ItemCountChangeEvent());
                 return true;
             }

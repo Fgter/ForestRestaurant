@@ -19,14 +19,8 @@ public class SellFoodCommand : AbstractCommand
     }
     protected override void OnExecute()
     {
-        if (_itemdic == null)
-        {
-            _itemdic = new(); 
-        }
-        if (_haveitemdic == null)
-        {
-            _haveitemdic = new();
-        }
+        _itemdic ??= new();
+        _haveitemdic ??= new();
         _itemdic.Clear();
         _haveitemdic.Clear();
         FoodItem foodItem = this.SendQuery(new GetFoodMenuInItemQuery(_id, SelectMenu.FoodMenu));
@@ -42,7 +36,14 @@ public class SellFoodCommand : AbstractCommand
         { 
             if (_itemModel.Items.ContainsKey(i))
             {
-                Run(i,foodItem,index);
+                if (_itemModel.Items[i].count == 0)
+                {
+                    istf = true;
+                }
+                else
+                {
+                    Run(i, foodItem, index);
+                }
             }
             else
             {
@@ -63,6 +64,7 @@ public class SellFoodCommand : AbstractCommand
         _restaurantModel.GoldSum.Value += foodItem.define.Price;
         foreach (var i in _haveitemdic.Keys)
         {
+            Debug.Log(i+" "+ _haveitemdic[i]);
             this.SendCommand(new RemoveItemCommand(i, _haveitemdic[i]));
         }
         this.SendEvent<ItemCountChangeEvent>();
