@@ -33,7 +33,7 @@ public class PlantingController : MonoBehaviour, IController
         {
             GameObject go = Instantiate(plantPrefab, this.transform);
             go.GetComponent<Plant>().Init(plant.Value, _model.soils[plant.Key]);
-
+            go.transform.position = _model.soils[plant.Key].position;
         }
     }
 

@@ -38,7 +38,7 @@ public class UIUnlimitedSilidePage : MonoBehaviour
     Page[] pages = new Page[3];
     bool animating;
     Dictionary<int, List<RectTransform>> pageElements = new Dictionary<int, List<RectTransform>>();
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < pages.Length; i++)
         {

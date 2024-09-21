@@ -18,7 +18,7 @@ class CreateItemCommand : AbstractCommand<Item>
                 SeedItem si = new SeedItem(this.SendQuery(new GetDefineQuery<SeedDefine>(id)));
                 return si;
 
-            case int id when (id > 1000 && id < 2000)://是收获作物
+            case int id when (id > 1000 && id < 2000)://是植物
                 //Item hi = new Item();
                 return default;
             case int id when (id > 2000 && id < 4000)://是食物

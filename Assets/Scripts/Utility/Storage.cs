@@ -13,7 +13,7 @@ public class Storage : IUtility
             Directory.CreateDirectory(dataPath);
         }
         string path = Path.Combine(dataPath, typeof(T).ToString() + fileName);
-        string json = JsonConvert.SerializeObject(obj,new VectorConverter());//VectorConverter处理坐标信息
+        string json = JsonConvert.SerializeObject(obj, new VectorConverter());//VectorConverter处理坐标信息
         File.WriteAllText(path, json);
 #if UNITY_EDITOR
         Debug.Log(path);
@@ -41,6 +41,7 @@ public class Storage : IUtility
             File.Delete(path);
         }
     }
+
     [MenuItem("Saves/ClearSaves")]
     public static void RemoveAllSaves()
     {
@@ -51,5 +52,17 @@ public class Storage : IUtility
         {
             File.Delete(i.FullName);
         }
+    }
+
+    [MenuItem("Saves/将时间的存档倒退一天")]
+    public static void SavesBackOneDay()
+    {
+        SaveData.TimeSaveData timeSaveData = new SaveData.TimeSaveData();
+        timeSaveData.lastExitTime = System.DateTime.Now.AddDays(-1);
+
+        string path = Path.Combine(dataPath, typeof(SaveData.TimeSaveData).ToString());
+        string json = JsonConvert.SerializeObject(timeSaveData, new VectorConverter());
+        File.WriteAllText(path, json);
+        Debug.Log("目前存档时间" + json);
     }
 }

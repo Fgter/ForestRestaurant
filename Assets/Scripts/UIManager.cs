@@ -25,6 +25,7 @@ public class UIManager : Singleton<UIManager>
         public string AssetName;
         public GameObject Instance;
         public UIWindowBase script;
+        public Canvas canvas;
     }
     public UIManager()
     {
@@ -62,8 +63,10 @@ public class UIManager : Singleton<UIManager>
                 }
                 info.Instance = GameObject.Instantiate(prefab);
                 info.script = info.Instance.GetComponent<T>();
+                info.canvas = info.Instance.GetComponent<Canvas>();
                 info.Instance.SetActive(true);
             }
+            info.canvas.sortingOrder = UILayerConfig.Fornt;
             info.script.OnShow(data);
             return info.script as T;
         }
@@ -85,6 +88,7 @@ public class UIManager : Singleton<UIManager>
                 if (!destroy)
                 {
                     info.script.OnHide();
+                    info.canvas.sortingOrder = UILayerConfig.Normal;
                     info.Instance.SetActive(false);
                 }
                 else
@@ -134,9 +138,11 @@ public class UIManager : Singleton<UIManager>
                 }
                 info.Instance = GameObject.Instantiate(prefab);
                 info.script = info.Instance.GetComponent<T>();
+                info.canvas = info.Instance.GetComponent<Canvas>();
                 info.Instance.SetActive(true);
             }
             info.script.OnShow(data);
+            info.canvas.sortingOrder = UILayerConfig.PopUI;
             #endregion
             Vector3 dir = offsetDir switch
             {
@@ -208,12 +214,14 @@ public class UIManager : Singleton<UIManager>
     {
         MessageTipData data = new MessageTipData(tip);
         UIMessageTip ui = Show<UIMessageTip>(data);
+        UIResources[typeof(UITip)].canvas.sortingOrder = UILayerConfig.TipUI;
         return ui;
     }
     public UITip ShowTip(string message)
     {
         UITipData data = new UITipData(message);
         UITip ui = Show<UITip>(data);
+        UIResources[typeof(UITip)].canvas.sortingOrder=UILayerConfig.TipUI;
         return ui;
     }
 }

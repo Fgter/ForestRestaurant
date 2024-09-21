@@ -77,11 +77,11 @@ public class UINumberControlBtn : MonoBehaviour
         int status = 0;
         if (currentNumber >= maxNumber)
             status = 1;
-        else if (currentNumber <= 0)
-            status = -1;
-
         btnIncrease.interactable = status != 1;
         btnMax.interactable = status != 1;
+
+        if (currentNumber <= 0)
+            status = -1;
         btnDecrease.interactable = status != -1;
         btnMin.interactable = status != -1;
 

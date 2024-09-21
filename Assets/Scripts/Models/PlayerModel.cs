@@ -3,9 +3,11 @@ namespace Models
 {
     public class PlayerModel : AbstractModel
     {
-        public BindableProperty<int> Gold { get; set; } = new ();
+        public bool isFirstEnter;
+        public BindableProperty<int> Gold { get; set; } = new();
         protected override void OnInit()
         {
+            isFirstEnter = true;
         }
     }
 

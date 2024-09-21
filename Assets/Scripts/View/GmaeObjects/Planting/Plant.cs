@@ -3,13 +3,13 @@ using QFramework;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Plant : MonoBehaviour,IController,IPointerClickHandler
+public class Plant : MonoBehaviour, IController, IPointerClickHandler
 {
     public SoilEntityData soil { get; private set; }
     public PlantEntityData entityData { get; private set; }
     AnimationPlayer anim;
 
-    public void Init(PlantEntityData entityData,SoilEntityData soil)
+    public void Init(PlantEntityData entityData, SoilEntityData soil)
     {
         this.entityData = entityData;
         this.soil = soil;
@@ -22,7 +22,10 @@ public class Plant : MonoBehaviour,IController,IPointerClickHandler
         if (entityData.TryHarvest())
         {
             PlantDefine define = entityData.define;
-            this.SendCommand(new AddItemCommand(define.HarvestId, Random.Range(define.HarvestCountMin, define.HarvestCountMax)));
+            int count = Random.Range(define.HarvestCountMin, define.HarvestCountMax);
+            this.SendCommand(new AddItemCommand(define.HarvestId, count));
+            var harvest = this.SendQuery(new GetDefineQuery<HarvestDefine>(define.HarvestId));
+            UIManager.instance.ShowTip(string.Format("»ñµÃ {0} * {1}", harvest.Name, count));
             if (entityData.canReGrow)
             {
                 entityData.ReGrow();

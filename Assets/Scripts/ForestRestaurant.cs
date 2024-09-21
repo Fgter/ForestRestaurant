@@ -23,6 +23,11 @@ public class ForestRestaurant : Architecture<ForestRestaurant>
         RegisterSystem(new PlantingSystem());
         RegisterSystem(new ShopSystem());
         RegisterSystem(new RestaurantSystem());
+        RegisterSystem(new BagSystem());
+        RegisterSystem(new PlayerSystem());
 
+        //GiveIntinalMaterials();
     }
+
+    
 }

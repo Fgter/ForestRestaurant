@@ -2,22 +2,27 @@
 using QFramework;
 using System.Collections.Generic;
 
-class GetItemsQuery<T>:AbstractQuery<List<T>> where T:Item
-    {
-
+class GetItemsQuery<T> : AbstractQuery<List<T>> where T : Item
+{
+    static List<T> result = new List<T>(20);
     protected override List<T> OnDo()
     {
         ItemModel model = this.GetModel<ItemModel>();
+        result.Clear();
         if (model.classifyItems.TryGetValue(typeof(T), out dynamic dic))
         {
             Dictionary<int, T> items = dic as Dictionary<int, T>;
-            List<T> result = new List<T>(items.Count);
-            result.AddRange(items.Values);
+            foreach (var item in items.Values)
+            {
+                if (item.count <= 0)
+                    continue;
+                result.Add(item);
+            }
             return result;
         }
         else
         {
-            return new List<T>();
+            return result;
         }
     }
 }

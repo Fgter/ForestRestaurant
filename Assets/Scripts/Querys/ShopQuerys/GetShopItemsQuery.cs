@@ -6,6 +6,7 @@ using UnityEngine;
 class GetShopItemsQuery : AbstractQuery<List<ShopItem>>
 {
     int id;
+    static List<ShopItem> result = new List<ShopItem>(20);
     public GetShopItemsQuery(int shopId)
     {
         this.id = shopId;
@@ -13,7 +14,7 @@ class GetShopItemsQuery : AbstractQuery<List<ShopItem>>
     protected override List<ShopItem> OnDo()
     {
         ShopModel model = this.GetModel<ShopModel>();
-        List<ShopItem> result = new List<ShopItem>();
+        result.Clear();
         if (model.shopItemDict.ContainsKey(id))
         {
             result.AddRange(model.shopItemDict[id].Values);
