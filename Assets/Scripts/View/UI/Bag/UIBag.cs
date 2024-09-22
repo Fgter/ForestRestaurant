@@ -17,7 +17,7 @@ public class UIBag : UIWindowBase
     Type currentItemType;
     private void Start()
     {
-        this.RegisterEvent<ItemCountChangeEvent>(v => RefreshCurrentPage());
+        this.RegisterEvent<ItemCountChangeEvent>(v => RefreshCurrentPage()).UnRegisterWhenGameObjectDestroyed(this);
     }
 
     public override void OnShow(IUIData showData)

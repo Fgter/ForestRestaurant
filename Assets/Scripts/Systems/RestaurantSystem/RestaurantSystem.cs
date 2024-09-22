@@ -97,7 +97,7 @@ public class RestaurantSystem : AbstractSystem
         }
         _model.GoldSum.Value = restaurantSaveData.GoldSum;
         _model.SelectMax = restaurantSaveData.SelectMax;
-        _thisTime = TimeConverter.DayToSecond(this.GetSystem<TimeSystem>().GetOfflinePeriod());
+        _thisTime = TimeConverter.DayToSecond(this.SendQuery(new GetOfflinePeriodQuery()));
         if (TimeConverter.SecondToDay(_thisTime) >= 1)
         {
             _model.Acclaims.Clear();//清除所有

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using QFramework;
 using System;
+using SaveData;
+using System.Reflection;
 
 namespace Models
 {
@@ -12,7 +14,53 @@ namespace Models
 
         protected override void OnInit()
         {
-            
+            Load();
+            CommonMono.AddQuitAction(Save);
+        }
+
+        void Load()
+        {
+            BagSaveData saveData = this.GetUtility<Storage>().Load<BagSaveData>();
+            if (saveData.items == null)
+                return;
+            foreach (var data in saveData.items)
+            {
+                Type type = this.SendQuery(new GetItemTypeQuery(data.id));
+                MethodInfo method = this.GetType().GetMethod("CreateAndCollectItem", BindingFlags.Instance | BindingFlags.NonPublic).MakeGenericMethod(type);
+                method.Invoke(this, new object[] { data.id, data.count });
+            }
+        }
+
+        void Save()
+        {
+            BagSaveData saveData = new BagSaveData();
+            saveData.items = new List<ItemSaveData>();
+            foreach (var item in Items)
+            {
+                saveData.items.Add(new ItemSaveData(item.Key, item.Value.count));
+            }
+            this.GetUtility<Storage>().Save(saveData);
+        }
+
+        /// <summary>
+        /// 创建Item对象并且加到字典中
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <param name="count"></param>
+        void CreateAndCollectItem<T>(int id, int count) where T : Item
+        {
+            Type itemType = typeof(T);
+            Type defineType = typeof(T).GetProperty("define").PropertyType;
+            dynamic define = this.SendQuery(new GetDefineByType(defineType, id));
+            T item = Activator.CreateInstance(itemType, new object[] { define }) as T;
+            item.count = count;
+            Items.Add(id, item);
+
+            //collect
+            Dictionary<int, T> newItems = new Dictionary<int, T>();
+            newItems[id] = item;
+            classifyItems[itemType] = newItems;
         }
     }
 }

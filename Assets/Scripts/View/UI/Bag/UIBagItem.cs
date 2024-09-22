@@ -16,9 +16,9 @@ public class UIBagItem : MonoBehaviour
     TextMeshProUGUI description;
     public void SetItem(Item item,int count)
     {
-        this.icon.overrideSprite = ResLoader.LoadSprite(item.define.Icon);
+        this.icon.overrideSprite = ResLoader.LoadSprite(item.Icondefine.Icon);
         this.count.text = count.ToString();
-        this.Name.text = item.define.Name;
-        this.description.text = item.define.Description;
+        this.Name.text = item.Icondefine.Name;
+        this.description.text = item.Icondefine.Description;
     }
 }

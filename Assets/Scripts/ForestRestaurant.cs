@@ -13,6 +13,7 @@ public class ForestRestaurant : Architecture<ForestRestaurant>
         RegisterUtility(new Storage());
         //Model
         RegisterModel(new DefineModel());
+        RegisterModel(new TimeModel());
         RegisterModel(new ItemModel());
         RegisterModel(new PlantModel());
         RegisterModel(new RestaurantModel());

@@ -71,7 +71,7 @@ public class UIFoodMenuItem :MonoBehaviour, IController,IPointerClickHandler
     }
     void SetSupplies(UIFoodMenuItemItem go, int id,int sum)
     {
-        string name = this.SendCommand(new CreateItemCommand(id)).define.Icon;
+        string name = this.SendCommand(new CreateItemCommand(id)).Icondefine.Icon;
         if (name.Equals(""))
         {
             go.Set($"X{sum}", ResLoader.Load<Sprite>(PathConfig.SpritePath + "Feces"));

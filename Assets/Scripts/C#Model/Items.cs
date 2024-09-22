@@ -7,15 +7,15 @@ using System;
 public class Item //子类构造函数记得给父类的define赋值,因为没有不能重写define属性
 {
     public int count { get; set; }
-    public virtual IIconItemDefine define { get; set; }
+    public virtual IIconItemDefine Icondefine { get; set; }
     public Type Type { get => this.GetType(); }
 }
 public class SeedItem : Item
 {
-    public new SeedDefine define { get; set; }
+    public SeedDefine define { get; set; }
     public SeedItem(SeedDefine define)
     {
-        base.define = define;
+        base.Icondefine = define;
         this.define = define;
         this.count = 0;
     }
@@ -23,10 +23,10 @@ public class SeedItem : Item
 
 public class HarvestItem:Item
 {
-    public new HarvestDefine define { get; set; }
+    public HarvestDefine define { get; set; }
     public HarvestItem(HarvestDefine define)
     {
-        base.define = define;
+        base.Icondefine = define;
         this.define = define;
         this.count = 0;
     }
@@ -34,10 +34,10 @@ public class HarvestItem:Item
 
 public class FoodItem:Item
 {
-    public new FoodDefine define { get; set; }
+    public FoodDefine define { get; set; }
     public FoodItem(FoodDefine define)
     {
-        base.define = define;
+        base.Icondefine = define;
         this.define = define;
         this.count = 0;
     }
@@ -45,10 +45,10 @@ public class FoodItem:Item
 
 public class SpecialtyItem : Item
 {
-    public new SpecialtyDefine define { get; set; }
+    public SpecialtyDefine define { get; set; }
     public SpecialtyItem(SpecialtyDefine define)
     {
-        base.define = define;
+        base.Icondefine = define;
         this.define = define;
         this.count = 0;
     }

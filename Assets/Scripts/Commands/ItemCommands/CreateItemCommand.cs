@@ -2,35 +2,30 @@
 using UnityEngine;
 using Models;
 using Define;
+using System.Reflection;
+using System;
 
 class CreateItemCommand : AbstractCommand<Item>
 {
     int id;
+    Item result;
     public CreateItemCommand(int id)
     {
         this.id = id;
     }
     protected override Item OnExecute()
     {
-        switch (id)
-        {
-            case int id when (id > 0 && id < 1000)://是种子
-                SeedItem si = new SeedItem(this.SendQuery(new GetDefineQuery<SeedDefine>(id)));
-                return si;
+        Type type = this.SendQuery(new GetItemTypeQuery(id));
+        MethodInfo method = this.GetType().GetMethod("CreateItem", BindingFlags.Instance | BindingFlags.NonPublic).MakeGenericMethod(type);
+        method.Invoke(this, null);
+        return result;
+    }
 
-            case int id when (id > 1000 && id < 2000)://是植物
-                //Item hi = new Item();
-                return default;
-            case int id when (id > 2000 && id < 4000)://是食物
-                FoodItem fi = new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(id)));
-                return fi;
-            case int id when (id > 10000):
-                HarvestItem hi = new HarvestItem(this.SendQuery(new GetDefineQuery<HarvestDefine>(id)));
-                return hi;
-                
-            default:
-                Debug.LogError("id" + id + " 没有这号东西，请查询策划案");
-                return default;
-        }
+    void CreateItem<T>() where T : Item
+    {
+        Type itemType = typeof(T);
+        Type defineType = typeof(T).GetProperty("define").PropertyType;
+        dynamic define = this.SendQuery(new GetDefineByType(defineType, id));
+        result = Activator.CreateInstance(typeof(T), new object[] { define }) as T;
     }
 }
