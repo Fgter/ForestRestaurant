@@ -5,11 +5,11 @@ using System;
 using QFramework;
 
 public interface IUIData
-{ 
+{
 
 }
 
-public class MessageTipData:IUIData
+public class MessageTipData : IUIData
 {
     public MessageTipData(string message)
     {
@@ -20,6 +20,7 @@ public class MessageTipData:IUIData
 public class UIManager : Singleton<UIManager>
 {
     Dictionary<Type, UIElement> UIResources = new Dictionary<Type, UIElement>();
+    Stack<UIElement> activeElements = new Stack<UIElement>();
     class UIElement
     {
         public string AssetName;
@@ -66,7 +67,8 @@ public class UIManager : Singleton<UIManager>
                 info.canvas = info.Instance.GetComponent<Canvas>();
                 info.Instance.SetActive(true);
             }
-            info.canvas.sortingOrder = UILayerConfig.Fornt;
+            info.canvas.sortingOrder = GetALayer();
+            activeElements.Push(info);
             info.script.OnShow(data);
             return info.script as T;
         }
@@ -88,7 +90,7 @@ public class UIManager : Singleton<UIManager>
                 if (!destroy)
                 {
                     info.script.OnHide();
-                    info.canvas.sortingOrder = UILayerConfig.Normal;
+                    info.canvas.sortingOrder = UILayerConfig.NormalBack;
                     info.Instance.SetActive(false);
                 }
                 else
@@ -100,6 +102,8 @@ public class UIManager : Singleton<UIManager>
                     info.script = null;
                 }
             }
+            if (activeElements.Count > 0)
+                activeElements.Pop();
         }
     }
 
@@ -117,7 +121,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="offset"></param>
     /// <param name="offsetDir"></param>
     /// <returns></returns>
-    public T ShowPop<T>(IUIData data, Transform ts, bool ownerIsUI=false, float offset = 1f, Dirction offsetDir = Dirction.right) where T : UIWindowBase
+    public T ShowPop<T>(IUIData data, Transform ts, bool ownerIsUI = false, float offset = 1f, Dirction offsetDir = Dirction.right) where T : UIWindowBase
     {
         #region
         Type type = typeof(T);
@@ -142,7 +146,7 @@ public class UIManager : Singleton<UIManager>
                 info.Instance.SetActive(true);
             }
             info.script.OnShow(data);
-            info.canvas.sortingOrder = UILayerConfig.PopUI;
+            info.canvas.sortingOrder = GetALayer();
             #endregion
             Vector3 dir = offsetDir switch
             {
@@ -178,7 +182,7 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    bool JudgmentUiInScreen(RectTransform rt,Dirction offsetDir)
+    bool JudgmentUiInScreen(RectTransform rt, Dirction offsetDir)
     {
         RectTransform rtransform = rt;
 
@@ -221,7 +225,15 @@ public class UIManager : Singleton<UIManager>
     {
         UITipData data = new UITipData(message);
         UITip ui = Show<UITip>(data);
-        UIResources[typeof(UITip)].canvas.sortingOrder=UILayerConfig.TipUI;
+        UIResources[typeof(UITip)].canvas.sortingOrder = UILayerConfig.TipUI;
         return ui;
+    }
+
+    int GetALayer()
+    {
+        UIElement element = null;
+        if (activeElements.Count > 0)
+            element = activeElements.Peek();
+        return element == null ? 1 : Math.Clamp(element.canvas.sortingOrder + 1, UILayerConfig.NormalBack, UILayerConfig.NomalFornt);
     }
 }
