@@ -37,7 +37,6 @@ public class UIManager : Singleton<UIManager>
         UIResources[typeof(UIBag)] = new UIElement { AssetName = PathConfig.UIPath + "Bag/UIBag" };
         UIResources[typeof(UIFoodMenu)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/FoodMenu/UIFoodMenuSet" };
         UIResources[typeof(UIMessageBoards)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/MessageBoards/UIMessageBoards" };
-        UIResources[typeof(UIShowMessage)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/MessageBoards/UIShowMessage" };
         UIResources[typeof(UICashRegister)] = new UIElement { AssetName = PathConfig.UIPath + "Restaurant/UICashRegister" };
         UIResources[typeof(UIMessageTip)] = new UIElement { AssetName = PathConfig.UIPath + "UIMessageTip" };
         UIResources[typeof(UIShop)] = new UIElement { AssetName = PathConfig.UIPath + "Shop/UIShop" };

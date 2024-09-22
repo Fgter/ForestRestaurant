@@ -16,7 +16,7 @@ public class UIShowMessage : UIWindowBase
     {
         _back.onClick.AddListener(() =>
         {
-            UIManager.instance.Close(typeof(UIShowMessage));
+            gameObject.SetActive(false);
         });
     }
     public override void OnShow(IUIData showData)

@@ -17,9 +17,12 @@ public class UIMessageBoards : UIWindowBase
     [SerializeField]
     Transform Bg;//父对象
     [SerializeField]
+    GameObject UIShowMessage;//UIShowMessage预制体
+    [SerializeField]
     Button Back;//返回按钮
     [SerializeField]
     List<GameObject> list;//存储已经存在的对象
+    UIShowMessage _UIShowMessage;
     void Start()
     {
         Back.onClick.AddListener(() =>
@@ -54,7 +57,7 @@ public class UIMessageBoards : UIWindowBase
                 bt.onClick.RemoveAllListeners();
                 bt.onClick.AddListener(() =>
                 {
-                    UIManager.instance.Show<UIShowMessage>(null).Set(this.SendQuery(new GetAcclaimQuery(ls[i])),null);
+                    PlayUIShowMessage(this.SendQuery(new GetAcclaimQuery(ls[i])),null);
                 });
             }
         }
@@ -72,7 +75,7 @@ public class UIMessageBoards : UIWindowBase
                 bt.onClick.RemoveAllListeners();
                 bt.onClick.AddListener(() =>
                 {
-                    UIManager.instance.Show<UIShowMessage>(null).Set(this.SendQuery(new GetAcclaimQuery(ls[i])), null);
+                    PlayUIShowMessage(this.SendQuery(new GetAcclaimQuery(ls[i])), null);
                 });
             }
         }
@@ -84,8 +87,17 @@ public class UIMessageBoards : UIWindowBase
         go.transform.localPosition = new Vector2(UnityEngine.Random.Range(-(ShowSize.sizeDelta.x / 2),(ShowSize.sizeDelta.x / 2)), UnityEngine.Random.Range(-(ShowSize.sizeDelta.y / 2),(ShowSize.sizeDelta.y / 2)));
         go.onClick.AddListener(() =>
         {
-            UIManager.instance.Show<UIShowMessage>(null).Set(text,sprite);
+            PlayUIShowMessage(text,sprite);
         });
         list.Add(go.gameObject);
+    }
+    void PlayUIShowMessage(string text,Sprite sprite)
+    {
+        if(_UIShowMessage == null)
+        {
+            _UIShowMessage = Instantiate(UIShowMessage,transform).GetComponent<UIShowMessage>();
+        }
+        _UIShowMessage.gameObject.SetActive(true);
+        _UIShowMessage.Set(text,sprite);
     }
 }
