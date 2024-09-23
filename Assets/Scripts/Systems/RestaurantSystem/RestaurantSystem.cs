@@ -19,6 +19,19 @@ public class RestaurantSystem : AbstractSystem
     protected override void OnInit()
     {
         _model = this.GetModel<RestaurantModel>();
+        _thisTime = TimeConverter.DayToSecond(this.SendQuery(new GetOfflinePeriodQuery()));
+        if (TimeConverter.SecondToDay(_thisTime) >= 1)
+        {
+            _model.Acclaims.Clear();//清除所有
+        }
+        while (_thisTime >= _jg)
+        {
+            _thisTime -= _jg;
+            if (RandomTrigger(_trigger))
+            {
+                Sold();
+            }
+        }
         CommonMono.AddFixedUpdateAction(() =>
         {
             _thisTime += Time.fixedDeltaTime;
@@ -31,8 +44,6 @@ public class RestaurantSystem : AbstractSystem
                 }
             }
         });
-        CommonMono.AddQuitAction(Save);
-        Load();
     }
 
     void Sold()//处理出售
@@ -68,50 +79,8 @@ public class RestaurantSystem : AbstractSystem
             return false;
         }
     }
-    void Save()
-    {
-        RestaurantSaveData restaurantSaveData = new();
-        restaurantSaveData.Acclaims = _model.Acclaims;
-        restaurantSaveData.CanSelectFoodMenu.AddRange (_model.CanSelectFoodMenu.Keys);
-        restaurantSaveData.ExpectedGoldSum = _model.ExpectedGoldSum;
-        restaurantSaveData.FoodMenu.AddRange(_model.FoodMenu.Keys) ;
-        restaurantSaveData.GoldSum = _model.GoldSum.Value;
-        restaurantSaveData.SelectMax = _model.SelectMax;
-        this.GetUtility<Storage>().Save(restaurantSaveData);
-    }
-    void Load()
-    {
-        RestaurantSaveData restaurantSaveData = new();
-        restaurantSaveData = this.GetUtility<Storage>().Load<RestaurantSaveData>();
-        if (restaurantSaveData == default)
-            return;
-        _model.Acclaims = restaurantSaveData.Acclaims;
-        foreach (var item in restaurantSaveData.CanSelectFoodMenu)
-        {
-            _model.CanSelectFoodMenu.Add(item, new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(item))));
-        }
-        _model.ExpectedGoldSum = restaurantSaveData.ExpectedGoldSum;
-        foreach (var item in restaurantSaveData.FoodMenu)
-        {
-            _model.FoodMenu.Add(item, new FoodItem(this.SendQuery(new GetDefineQuery<FoodDefine>(item))));
-        }
-        _model.GoldSum.Value = restaurantSaveData.GoldSum;
-        _model.SelectMax = restaurantSaveData.SelectMax;
-        _thisTime = TimeConverter.DayToSecond(this.SendQuery(new GetOfflinePeriodQuery()));
-        if (TimeConverter.SecondToDay(_thisTime) >= 1)
-        {
-            _model.Acclaims.Clear();//清除所有
-        }
-        while (_thisTime >= _jg)
-        {
-            _thisTime -= _jg;
-            if (RandomTrigger(_trigger))
-            {
-                Sold();
-            }
-        }
-    }
-    public static void AddTiem(float time)
+    
+    public static void AddTiem(float time)//测试用例(可删除)
     {
         _thisTime += time;
     }
