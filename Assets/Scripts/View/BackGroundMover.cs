@@ -15,14 +15,17 @@ public class BackGroundMover : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     Vector2 verticalArea;
 
     bool _darg;
+    float x;
+    float y;
     private void Update()
     {
         if (_darg && Input.touchCount > 0)
         {
-            float x = Mathf.Clamp(Camera.main.transform.position.x - Input.GetTouch(0).deltaPosition.x * sensitivity * 0.01f, horizontalArea.x, horizontalArea.y);
-            float y = Mathf.Clamp(Camera.main.transform.position.y - Input.GetTouch(0).deltaPosition.y * sensitivity * 0.01f, verticalArea.x, verticalArea.y);
-            Camera.main.transform.position = new Vector3(x, y, -10);
+            x = Mathf.Clamp(Camera.main.transform.position.x - Input.GetTouch(0).deltaPosition.x * sensitivity , horizontalArea.x, horizontalArea.y);
+            y = Mathf.Clamp(Camera.main.transform.position.y - Input.GetTouch(0).deltaPosition.y * sensitivity , verticalArea.x, verticalArea.y);
+           
         }
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(x, y, -10),Time.deltaTime) ;
     }
 
     public void OnPointerUp(PointerEventData eventData)

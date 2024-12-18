@@ -2,6 +2,7 @@
 using Models;
 using QFramework;
 using SaveData;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 public class RestaurantSystem : AbstractSystem
 {
-    int _jg = 300;//间隔时间触发随机出售(s)<-可能需要放到配置表中
+    float _jg = 300;//间隔时间触发随机出售(s)<-可能需要放到配置表中
     static float _thisTime = 0;//已经过去的时间
     float _trigger = 0.6f;//每次触发时的概率
     int _ranindex;//随机数随机出的值
@@ -24,6 +25,9 @@ public class RestaurantSystem : AbstractSystem
         {
             _model.Acclaims.Clear();//清除所有
         }
+        _thisTime = (float)Math.Round(TimeConverter.SecondToHour(_thisTime), 2);
+        Debug.Log(_thisTime);
+        _jg = (float)Math.Round(TimeConverter.SecondToHour(_jg),2);
         while (_thisTime >= _jg)
         {
             _thisTime -= _jg;
