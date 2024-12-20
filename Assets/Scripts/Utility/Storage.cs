@@ -41,7 +41,7 @@ public class Storage : IUtility
             File.Delete(path);
         }
     }
-
+#if UNITY_EDITOR
     [MenuItem("Saves/ClearSaves")]
     public static void RemoveAllSaves()
     {
@@ -65,4 +65,5 @@ public class Storage : IUtility
         File.WriteAllText(path, json);
         Debug.Log("目前存档时间" + json);
     }
+#endif
 }

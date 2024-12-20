@@ -31,11 +31,13 @@ public class Test2 : MonoBehaviour,IPointerClickHandler, IController
     {
         UIManager.instance.Show<UICashRegister>(null);//收银台
     }
+#if UNITY_EDITOR
     [ContextMenu("删档")]
     public void Delect()
     {
         Storage.RemoveAllSaves();
     }
+#endif
     [ContextMenu("解锁食物")]
     public void AddFood()
     {

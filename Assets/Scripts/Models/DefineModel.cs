@@ -11,7 +11,7 @@ namespace Models
 {
     class DefineModel : AbstractModel
     {
-        public const string DataPath = "Data/Data/";
+        public const string DataPath = "Assets/Data/";
         protected override void OnInit()
         {
             Load();
